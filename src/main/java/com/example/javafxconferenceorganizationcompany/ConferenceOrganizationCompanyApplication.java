@@ -17,13 +17,7 @@ public class ConferenceOrganizationCompanyApplication extends Application {
         String url = "jdbc:sqlserver://localhost:1433;user=orange;password=1234;encrypt=false;";
         try {
             var connection = DriverManager.getConnection(url);
-            try(var statement = connection.prepareCall("EXEC GET_ALL_ACTIVE_DISHES")) {
-                var resultSet = statement.executeQuery();
-                while(resultSet.next()) {
-                    stage.setTitle(resultSet.getNString(1));
-                    System.out.println(resultSet.getNString(1));
-                }
-            }
+
             FXMLLoader fxmlLoader = new FXMLLoader(ConferenceOrganizationCompanyApplication.class.getResource("authentication-view.fxml"));
 
             Scene scene = new Scene(fxmlLoader.load(), 700, 400);
@@ -36,7 +30,6 @@ public class ConferenceOrganizationCompanyApplication extends Application {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
     }
 
     public static void main(String[] args) {

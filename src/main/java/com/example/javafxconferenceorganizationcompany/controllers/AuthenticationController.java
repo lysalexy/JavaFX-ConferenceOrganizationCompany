@@ -1,6 +1,8 @@
 package com.example.javafxconferenceorganizationcompany.controllers;
 
 import com.example.javafxconferenceorganizationcompany.ConferenceOrganizationCompanyApplication;
+import com.example.javafxconferenceorganizationcompany.controllers.PersonalAssistant.PersonalAssistantMainController;
+import com.example.javafxconferenceorganizationcompany.repository.UserRepository;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -50,11 +52,18 @@ public class AuthenticationController implements Initializable {
                 int userId=result.getInt(1);
                 System.out.println(userId);
                 int roleId=result.getInt(8);
+                UserRepository userRepository = new UserRepository(connection);
+                login.getScene().getWindow().getOnCloseRequest();
                 switch (roleId) {////переносим на главную вкладку роли
                     case 1:
                     case 2:
                         FXMLLoader fxmlLoader = new FXMLLoader(ConferenceOrganizationCompanyApplication.class.getResource("personal-assistant-main-view.fxml"));
-                        Scene newScene = new Scene(fxmlLoader.load(), 700, 400);
+                        Scene newScene = new Scene(fxmlLoader.load(), 700, 700);
+                        PersonalAssistantMainController controller = fxmlLoader.getController();
+                        controller.setUserRepository(userRepository);
+                        controller.setStage(stage);
+                        controller.setId(userId);
+                        controller.setInfo();
                         stage.setScene(newScene);
                     case 3:
                 }
@@ -63,9 +72,7 @@ public class AuthenticationController implements Initializable {
                 invalidLoginOrPassword.setText("Неверный логин или пароль");
             }
         }
-        catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
+        catch (SQLException | IOException e) {
             throw new RuntimeException(e);
         }
     }
