@@ -1,11 +1,16 @@
 package com.example.javafxconferenceorganizationcompany.controllers;
 
+import com.example.javafxconferenceorganizationcompany.ConferenceOrganizationCompanyApplication;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -15,6 +20,7 @@ import java.util.ResourceBundle;
 
 public class AuthenticationController implements Initializable {
     Connection connection;
+    Stage stage;
 
     @FXML
     private TextField login;
@@ -44,10 +50,12 @@ public class AuthenticationController implements Initializable {
                 int userId=result.getInt(1);
                 System.out.println(userId);
                 int roleId=result.getInt(8);
-                login.getScene().getWindow().hide();
                 switch (roleId) {////переносим на главную вкладку роли
                     case 1:
                     case 2:
+                        FXMLLoader fxmlLoader = new FXMLLoader(ConferenceOrganizationCompanyApplication.class.getResource("personal-assistant-main-view.fxml"));
+                        Scene newScene = new Scene(fxmlLoader.load(), 700, 400);
+                        stage.setScene(newScene);
                     case 3:
                 }
             }
@@ -57,11 +65,16 @@ public class AuthenticationController implements Initializable {
         }
         catch (SQLException e) {
             throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
     public void setConnection(Connection con){
         connection=con;
+    }
+    public void setStage(Stage st){
+        stage=st;
     }
 
     @Override

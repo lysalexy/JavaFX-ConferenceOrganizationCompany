@@ -29,6 +29,7 @@ public class ConferenceOrganizationCompanyApplication extends Application {
             Scene scene = new Scene(fxmlLoader.load(), 700, 400);
             AuthenticationController controller = fxmlLoader.getController();
             controller.setConnection(connection);
+            controller.setStage(stage);
 
             stage.setScene(scene);
             stage.show();
