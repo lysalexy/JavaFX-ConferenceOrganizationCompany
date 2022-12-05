@@ -1,14 +1,21 @@
 package com.example.javafxconferenceorganizationcompany.controllers.PersonalAssistant;
 
 import com.example.javafxconferenceorganizationcompany.ConferenceOrganizationCompanyApplication;
+import com.example.javafxconferenceorganizationcompany.models.Conference;
 import com.example.javafxconferenceorganizationcompany.models.User;
+import com.example.javafxconferenceorganizationcompany.repository.ConferenceRepository;
 import com.example.javafxconferenceorganizationcompany.repository.UserRepository;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -18,8 +25,27 @@ import java.util.ResourceBundle;
 
 public class PersonalAssistantMainController implements Initializable {
     UserRepository userRepository;
+    ConferenceRepository conferenceRepository;
     Stage stage;
     Integer id;
+
+    @FXML
+    private TableView<Conference> conferences;
+
+    @FXML
+    private TableColumn<User,String> startColumn;
+
+    @FXML
+    private TableColumn<User,String> finishColumn;
+
+    @FXML
+    private TableColumn<User,String> locationColumn;
+
+    @FXML
+    private TableColumn<User, String> companyColumn;
+
+    @FXML
+    private TableColumn<User, Button> moreColumn;
 
     @FXML
     private Label email;
@@ -40,6 +66,10 @@ public class PersonalAssistantMainController implements Initializable {
         userRepository=userRep;
     }
 
+    public void setConferenceRepository (ConferenceRepository conferenceRep){
+        conferenceRepository=conferenceRep;
+    };
+
     public void setStage(Stage st) {
         stage = st;
     }
@@ -56,6 +86,23 @@ public class PersonalAssistantMainController implements Initializable {
         phoneNumber.setText(user.getPhoneNumber());
         birthDay.setText(user.getBirthDate());
         email.setText(user.getEmail());
+
+        ObservableList<Conference> confs= conferenceRepository.getPersonalAssistantConferencesByID(id);
+
+        // устанавливаем тип и значение которое должно хранится в колонке
+
+        startColumn.setCellValueFactory(new PropertyValueFactory<>("startTime"));
+//        startColumn.setCellValueFactory(cell -> cell.setWarpText(true));
+
+        finishColumn.setCellValueFactory(new PropertyValueFactory<>("finishTime"));
+        locationColumn.setCellValueFactory(new PropertyValueFactory<>("conferenceLocationAddress"));
+        companyColumn.setCellValueFactory(new PropertyValueFactory<>("companyName"));
+        moreColumn.setCellValueFactory(new PropertyValueFactory<>("more"));
+
+        // заполняем таблицу данными
+        conferences.setItems(confs);
+
+
 
     }
     public void onClickChangePassword(){

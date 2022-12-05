@@ -2,6 +2,7 @@ package com.example.javafxconferenceorganizationcompany.controllers;
 
 import com.example.javafxconferenceorganizationcompany.ConferenceOrganizationCompanyApplication;
 import com.example.javafxconferenceorganizationcompany.controllers.PersonalAssistant.PersonalAssistantMainController;
+import com.example.javafxconferenceorganizationcompany.repository.ConferenceRepository;
 import com.example.javafxconferenceorganizationcompany.repository.UserRepository;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -48,24 +49,31 @@ public class AuthenticationController implements Initializable {
             System.out.println(request);
             ResultSet result = request.executeQuery();
             System.out.println(result);
-            if (result.next()){
-                int userId=result.getInt(1);
+            if (result.next()) {
+                int userId = result.getInt(1);
                 System.out.println(userId);
-                int roleId=result.getInt(8);
-                UserRepository userRepository = new UserRepository(connection);
-                login.getScene().getWindow().getOnCloseRequest();
-                switch (roleId) {////переносим на главную вкладку роли
-                    case 1:
-                    case 2:
-                        FXMLLoader fxmlLoader = new FXMLLoader(ConferenceOrganizationCompanyApplication.class.getResource("personal-assistant-main-view.fxml"));
-                        Scene newScene = new Scene(fxmlLoader.load(), 700, 700);
-                        PersonalAssistantMainController controller = fxmlLoader.getController();
-                        controller.setUserRepository(userRepository);
-                        controller.setStage(stage);
-                        controller.setId(userId);
-                        controller.setInfo();
-                        stage.setScene(newScene);
-                    case 3:
+                int roleId = result.getInt(8);
+                boolean isActive = result.getBoolean(9);
+                if (isActive) {
+                    UserRepository userRepository = new UserRepository(connection);
+                    ConferenceRepository conferenceRepository = new ConferenceRepository(connection);
+                    login.getScene().getWindow().getOnCloseRequest();
+                    switch (roleId) {////переносим на главную вкладку роли
+                        case 1:
+                        case 2:
+                            FXMLLoader fxmlLoader = new FXMLLoader(ConferenceOrganizationCompanyApplication.class.getResource("personal-assistant-main-view.fxml"));
+                            Scene newScene = new Scene(fxmlLoader.load(), 700, 700);
+                            PersonalAssistantMainController controller = fxmlLoader.getController();
+                            controller.setConferenceRepository(conferenceRepository);
+                            controller.setUserRepository(userRepository);
+                            controller.setStage(stage);
+                            controller.setId(userId);
+                            controller.setInfo();
+                            stage.setScene(newScene);
+                        case 3:
+                    }
+                } else {
+                    invalidLoginOrPassword.setText("Учётная запись деактивирована");
                 }
             }
             else{

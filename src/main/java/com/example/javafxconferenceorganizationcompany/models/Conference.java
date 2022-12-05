@@ -4,6 +4,7 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.scene.control.Button;
 
 public class Conference {
     private IntegerProperty conferenceId;
@@ -20,6 +21,8 @@ public class Conference {
     private StringProperty mainParticipantContactTelephoneNumber;
     private IntegerProperty personalAssistantId;
 
+    private Button more;
+
     public Conference(){
         conferenceId=new SimpleIntegerProperty();
         startTime=new SimpleStringProperty();
@@ -34,6 +37,7 @@ public class Conference {
         mainParticipantFIO=new SimpleStringProperty();
         mainParticipantContactTelephoneNumber=new SimpleStringProperty();
         personalAssistantId=new SimpleIntegerProperty();
+        more=new Button();
     }
 
     public void setConferenceId(int id) {
@@ -114,5 +118,9 @@ public class Conference {
     }
     public int getPersonalAssistantId() {
         return personalAssistantId.get();
+    }
+
+    public Button getMore() {
+        return more;
     }
 }
