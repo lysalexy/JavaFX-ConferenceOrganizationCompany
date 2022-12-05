@@ -8,8 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="700.0" style="-fx-background-color: #FFDAB9;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.example.javafxconferenceorganizationcompany.controllers.PersonalAssistant.PersonalAssistantMainController">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="700.0" style="-fx-background-color: #FFDAB9;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javafxconferenceorganizationcompany.controllers.PersonalAssistant.PersonalAssistantMainController">
    <children>
       <AnchorPane prefHeight="89.0" prefWidth="700.0" style="-fx-background-color: #FF7F50;">
          <children>
@@ -20,7 +19,7 @@
             </Label>
          </children>
       </AnchorPane>
-      <Button id="changePassword" layoutX="506.0" layoutY="277.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="166.0" style="-fx-background-color: #FF7F50;" text="Изменить пароль" textFill="#f7f1f1" underline="true">
+      <Button id="changePassword" layoutX="506.0" layoutY="277.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="166.0" style="-fx-background-color: #FF7F50;" text="Изменить пароль" textFill="#f7f1f1" underline="true" onAction="#onClickChangePassword">
          <font>
             <Font name="Georgia" size="14.0" />
          </font>
@@ -50,15 +49,15 @@
             <Font name="Georgia Italic" size="16.0" />
          </font>
       </Label>
-      <Label fx:id="birthDay" layoutX="257.0" layoutY="126.0" prefHeight="29.0" prefWidth="384.0" />
-      <Label fx:id="FIO" layoutX="257.0" layoutY="96.0" prefHeight="29.0" prefWidth="384.0" />
-      <Button id="changeLogin" layoutX="587.0" layoutY="195.0" mnemonicParsing="false" style="-fx-background-color: #FF7F50;" text="Изменить" textFill="#f7f1f1" underline="true">
+      <Label id="birthDay" fx:id="birthDay" layoutX="257.0" layoutY="126.0" prefHeight="29.0" prefWidth="384.0" />
+      <Label id="FIO" fx:id="FIO" layoutX="257.0" layoutY="96.0" prefHeight="29.0" prefWidth="384.0" />
+      <Button id="changeLogin" layoutX="587.0" layoutY="195.0" mnemonicParsing="false" style="-fx-background-color: #FF7F50;" text="Изменить" textFill="#f7f1f1" underline="true" onAction="#onClickChangeLogin">
          <font>
             <Font name="Georgia" size="14.0" />
          </font>
       </Button>
-      <Label fx:id="email" layoutX="257.0" layoutY="231.0" prefHeight="30.0" prefWidth="258.0" />
-      <Button id="changeEmail" layoutX="586.0" layoutY="232.0" mnemonicParsing="false" style="-fx-background-color: #FF7F50;" text="Изменить" textFill="#f7f1f1" underline="true">
+      <Label id="email" fx:id="email" layoutX="257.0" layoutY="231.0" prefHeight="30.0" prefWidth="258.0" />
+      <Button id="changeEmail" layoutX="586.0" layoutY="232.0" mnemonicParsing="false" onAction="#onClickChangeEmail" style="-fx-background-color: #FF7F50;" text="Изменить" textFill="#f7f1f1" underline="true">
          <font>
             <Font name="Georgia" size="14.0" />
          </font>
@@ -84,17 +83,17 @@
             </AnchorPane>
         </content>
       </ScrollPane>
-      <Label fx:id="login" layoutX="257.0" layoutY="189.0" prefHeight="30.0" prefWidth="258.0" />
+      <Label id="login" fx:id="login" layoutX="257.0" layoutY="189.0" prefHeight="30.0" prefWidth="258.0" />
       <Label layoutX="24.0" layoutY="169.0" prefHeight="19.0" prefWidth="144.0" text="Номер телефона">
          <font>
             <Font name="Georgia Italic" size="16.0" />
          </font>
       </Label>
-      <Button fx:id="changePhone" layoutX="587.0" layoutY="161.0" mnemonicParsing="false" style="-fx-background-color: #FF7F50;" text="Изменить" textFill="#f7f1f1" underline="true" onAction="#onClickChangePhoneNumber">
+      <Button fx:id="changePhone" layoutX="587.0" layoutY="161.0" mnemonicParsing="false" onAction="#onClickChangePhoneNumber" style="-fx-background-color: #FF7F50;" text="Изменить" textFill="#f7f1f1" underline="true">
          <font>
             <Font name="Georgia" size="14.0" />
          </font>
       </Button>
-      <Label fx:id="phoneNumber" layoutX="257.0" layoutY="162.0" prefHeight="30.0" prefWidth="258.0" />
+      <Label id="phoneNumber" fx:id="phoneNumber" layoutX="257.0" layoutY="162.0" prefHeight="30.0" prefWidth="258.0" />
    </children>
 </AnchorPane>

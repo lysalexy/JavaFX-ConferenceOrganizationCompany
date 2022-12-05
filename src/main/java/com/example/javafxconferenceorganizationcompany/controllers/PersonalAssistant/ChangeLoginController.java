@@ -14,22 +14,18 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-public class ChangePhoneNumberController implements Initializable {
+public class ChangeLoginController implements Initializable {
     UserRepository userRepository;
     Stage stage;
     Integer id;
 
     @FXML
-    private TextField newPhone;
+    private TextField newLogin;
 
     @FXML
     private Label birthDay;
-
     @FXML
-    private Label login;
+    private Label phoneNumber;
 
     @FXML
     private Label email;
@@ -41,7 +37,7 @@ public class ChangePhoneNumberController implements Initializable {
     private Label invalidInput;
 
     public void setUserRepository(UserRepository userRep) {
-        userRepository=userRep;
+        userRepository = userRep;
     }
 
     public void setStage(Stage st) {
@@ -50,15 +46,6 @@ public class ChangePhoneNumberController implements Initializable {
 
     public void setId(Integer i) {
         id = i;
-    }
-
-    public void setInfo(){
-        User user=UserRepository.getUserPersonalInfo(id);
-
-        login.setText(user.getUserLogin());
-        FIO.setText(user.getFIO());
-        birthDay.setText(user.getBirthDate());
-        email.setText(user.getEmail());
     }
 
     public void backToMain(){
@@ -77,12 +64,20 @@ public class ChangePhoneNumberController implements Initializable {
         stage.setScene(newScene);
 
     }
+
+    public void setInfo() {
+        User user = UserRepository.getUserPersonalInfo(id);
+
+        phoneNumber.setText(user.getPhoneNumber());
+        FIO.setText(user.getFIO());
+        birthDay.setText(user.getBirthDate());
+        email.setText(user.getEmail());
+    }
+
     public void onClick() {
-        String newPhoneNumber= newPhone.getText();
-        Pattern phone = Pattern.compile("\\+7\\d{10}");
-        Matcher match=phone.matcher(newPhoneNumber);
-        if (match.matches()) {
-            UserRepository.changePhoneNumber(id, newPhoneNumber);
+        String newLog = newLogin.getText();
+        String input = UserRepository.changeLogin(id, newLog);
+        if (input.equals("")) {
             backToMain();
 //            FXMLLoader fxmlLoader = new FXMLLoader(ConferenceOrganizationCompanyApplication.class.getResource("personal-assistant-main-view.fxml"));
 //            Scene newScene = null;
@@ -99,9 +94,10 @@ public class ChangePhoneNumberController implements Initializable {
 //            stage.setScene(newScene);
         }
         else{
-            invalidInput.setText("Некорректные данные. Введите номер телефора в формате +79290367459");
+            invalidInput.setText(input);
         }
     }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 

@@ -17,13 +17,13 @@ import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class ChangePhoneNumberController implements Initializable {
+public class ChangePasswordController implements Initializable {
     UserRepository userRepository;
     Stage stage;
     Integer id;
 
     @FXML
-    private TextField newPhone;
+    private TextField newPassword;
 
     @FXML
     private Label birthDay;
@@ -36,12 +36,12 @@ public class ChangePhoneNumberController implements Initializable {
 
     @FXML
     private Label FIO;
-
     @FXML
-    private Label invalidInput;
+    private Label phoneNumber;
+
 
     public void setUserRepository(UserRepository userRep) {
-        userRepository=userRep;
+        userRepository = userRep;
     }
 
     public void setStage(Stage st) {
@@ -50,15 +50,6 @@ public class ChangePhoneNumberController implements Initializable {
 
     public void setId(Integer i) {
         id = i;
-    }
-
-    public void setInfo(){
-        User user=UserRepository.getUserPersonalInfo(id);
-
-        login.setText(user.getUserLogin());
-        FIO.setText(user.getFIO());
-        birthDay.setText(user.getBirthDate());
-        email.setText(user.getEmail());
     }
 
     public void backToMain(){
@@ -77,31 +68,38 @@ public class ChangePhoneNumberController implements Initializable {
         stage.setScene(newScene);
 
     }
-    public void onClick() {
-        String newPhoneNumber= newPhone.getText();
-        Pattern phone = Pattern.compile("\\+7\\d{10}");
-        Matcher match=phone.matcher(newPhoneNumber);
-        if (match.matches()) {
-            UserRepository.changePhoneNumber(id, newPhoneNumber);
-            backToMain();
-//            FXMLLoader fxmlLoader = new FXMLLoader(ConferenceOrganizationCompanyApplication.class.getResource("personal-assistant-main-view.fxml"));
-//            Scene newScene = null;
-//            try {
-//                newScene = new Scene(fxmlLoader.load(), 700, 700);
-//            } catch (IOException e) {
-//                throw new RuntimeException(e);
-//            }
-//            PersonalAssistantMainController controller = fxmlLoader.getController();
-//            controller.setUserRepository(userRepository);
-//            controller.setStage(stage);
-//            controller.setId(id);
-//            controller.setInfo();
-//            stage.setScene(newScene);
-        }
-        else{
-            invalidInput.setText("Некорректные данные. Введите номер телефора в формате +79290367459");
-        }
+
+    public void setInfo() {
+        User user = UserRepository.getUserPersonalInfo(id);
+
+        login.setText(user.getUserLogin());
+        FIO.setText(user.getFIO());
+        birthDay.setText(user.getBirthDate());
+        email.setText(user.getEmail());
+        phoneNumber.setText(user.getPhoneNumber());
     }
+
+    public void onClick() {
+        String newPass = newPassword.getText();
+
+        UserRepository.changePassword(id, newPass);
+        backToMain();
+//        FXMLLoader fxmlLoader = new FXMLLoader(ConferenceOrganizationCompanyApplication.class.getResource("personal-assistant-main-view.fxml"));
+//        Scene newScene = null;
+//        try {
+//            newScene = new Scene(fxmlLoader.load(), 700, 700);
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+//        PersonalAssistantMainController controller = fxmlLoader.getController();
+//        controller.setUserRepository(userRepository);
+//        controller.setStage(stage);
+//        controller.setId(id);
+//        controller.setInfo();
+//        stage.setScene(newScene);
+    }
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 

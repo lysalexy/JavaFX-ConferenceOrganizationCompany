@@ -58,7 +58,56 @@ public class PersonalAssistantMainController implements Initializable {
         email.setText(user.getEmail());
 
     }
+    public void onClickChangePassword(){
+        FXMLLoader fxmlLoader = new FXMLLoader(ConferenceOrganizationCompanyApplication.class.getResource("personal-assistant-change-password.fxml"));
+        Scene newScene = null;
+        try {
+            newScene = new Scene(fxmlLoader.load(), 700, 700);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        ChangePasswordController controller = fxmlLoader.getController();
+        controller.setUserRepository(userRepository);
+        controller.setStage(stage);
+        controller.setId(id);
+        controller.setInfo();
+        stage.setScene(newScene);
 
+    }
+
+    public void onClickChangeLogin(){
+        FXMLLoader fxmlLoader = new FXMLLoader(ConferenceOrganizationCompanyApplication.class.getResource("personal-assistant-change-login.fxml"));
+        Scene newScene = null;
+        try {
+            newScene = new Scene(fxmlLoader.load(), 700, 700);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        ChangeLoginController controller = fxmlLoader.getController();
+        controller.setUserRepository(userRepository);
+        controller.setStage(stage);
+        controller.setId(id);
+        controller.setInfo();
+        stage.setScene(newScene);
+
+    }
+
+    public void onClickChangeEmail(){
+        FXMLLoader fxmlLoader = new FXMLLoader(ConferenceOrganizationCompanyApplication.class.getResource("personal-assistant-change-email.fxml"));
+        Scene newScene = null;
+        try {
+            newScene = new Scene(fxmlLoader.load(), 700, 700);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        ChangeEmailController controller = fxmlLoader.getController();
+        controller.setUserRepository(userRepository);
+        controller.setStage(stage);
+        controller.setId(id);
+        controller.setInfo();
+        stage.setScene(newScene);
+
+    }
     public void onClickChangePhoneNumber(){
         FXMLLoader fxmlLoader = new FXMLLoader(ConferenceOrganizationCompanyApplication.class.getResource("personal-assistant-change-phone.fxml"));
         Scene newScene = null;
@@ -77,7 +126,6 @@ public class PersonalAssistantMainController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
     }
 }
 

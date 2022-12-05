@@ -17,13 +17,13 @@ import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class ChangePhoneNumberController implements Initializable {
+public class ChangeEmailController implements Initializable {
     UserRepository userRepository;
     Stage stage;
     Integer id;
 
     @FXML
-    private TextField newPhone;
+    private TextField newEmail;
 
     @FXML
     private Label birthDay;
@@ -32,7 +32,7 @@ public class ChangePhoneNumberController implements Initializable {
     private Label login;
 
     @FXML
-    private Label email;
+    private Label phoneNumber;
 
     @FXML
     private Label FIO;
@@ -58,7 +58,7 @@ public class ChangePhoneNumberController implements Initializable {
         login.setText(user.getUserLogin());
         FIO.setText(user.getFIO());
         birthDay.setText(user.getBirthDate());
-        email.setText(user.getEmail());
+        phoneNumber.setText(user.getPhoneNumber());
     }
 
     public void backToMain(){
@@ -78,11 +78,14 @@ public class ChangePhoneNumberController implements Initializable {
 
     }
     public void onClick() {
-        String newPhoneNumber= newPhone.getText();
-        Pattern phone = Pattern.compile("\\+7\\d{10}");
-        Matcher match=phone.matcher(newPhoneNumber);
+        String email= newEmail.getText();
+        Pattern em = Pattern.compile("^[a-zA-Z0-9_+&*-]+(?:\\."+
+                "[a-zA-Z0-9_+&*-]+)*@" +
+                "(?:[a-zA-Z0-9-]+\\.)+[a-z" +
+                "A-Z]{2,7}$");
+        Matcher match=em.matcher(email);
         if (match.matches()) {
-            UserRepository.changePhoneNumber(id, newPhoneNumber);
+            UserRepository.changeEmail(id, email);
             backToMain();
 //            FXMLLoader fxmlLoader = new FXMLLoader(ConferenceOrganizationCompanyApplication.class.getResource("personal-assistant-main-view.fxml"));
 //            Scene newScene = null;
@@ -99,7 +102,7 @@ public class ChangePhoneNumberController implements Initializable {
 //            stage.setScene(newScene);
         }
         else{
-            invalidInput.setText("Некорректные данные. Введите номер телефора в формате +79290367459");
+            invalidInput.setText("Некорректные данные. Введите настоящий адрес электронной почты");
         }
     }
     @Override

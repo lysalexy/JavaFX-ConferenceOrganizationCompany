@@ -10,7 +10,7 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="700.0" style="-fx-background-color: #FFDAB9;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.example.javafxconferenceorganizationcompany.controllers.PersonalAssistant.ChangePhoneNumberController">
+            fx:controller="com.example.javafxconferenceorganizationcompany.controllers.PersonalAssistant.ChangeLoginController">
    <children>
       <AnchorPane prefHeight="89.0" prefWidth="700.0" style="-fx-background-color: #FF7F50;">
          <children>
@@ -53,7 +53,7 @@
       </Label>
       <Label fx:id="birthDay" layoutX="257.0" layoutY="126.0" prefHeight="29.0" prefWidth="384.0" />
       <Label fx:id="FIO" layoutX="257.0" layoutY="96.0" prefHeight="29.0" prefWidth="384.0" />
-      <Button id="changeLogin" layoutX="587.0" layoutY="195.0" mnemonicParsing="false" style="-fx-background-color: #FF7F50;" text="Изменить" textFill="#f7f1f1" underline="true" onAction="#backToMain">
+      <Button id="changeLogin" layoutX="587.0" layoutY="196.0" mnemonicParsing="false" style="-fx-background-color: #FF7F50;" text="Обновить" textFill="#f7f1f1" underline="true" onAction="#onClick">
          <font>
             <Font name="Georgia" size="14.0" />
          </font>
@@ -85,22 +85,22 @@
             </AnchorPane>
         </content>
       </ScrollPane>
-      <Label fx:id="login" layoutX="257.0" layoutY="189.0" prefHeight="30.0" prefWidth="258.0" />
+      <Label id="phoneNumber" fx:id="phoneNumber" layoutX="257.0" layoutY="161.0" prefHeight="30.0" prefWidth="258.0" />
       <Label layoutX="24.0" layoutY="169.0" prefHeight="19.0" prefWidth="144.0" text="Номер телефона">
          <font>
             <Font name="Georgia Italic" size="16.0" />
          </font>
       </Label>
-      <Button fx:id="changePhone" layoutX="587.0" layoutY="161.0" mnemonicParsing="false" prefHeight="22.0" prefWidth="85.0" style="-fx-background-color: #FF7F50;" text="Обновить" textFill="#f7f1f1" underline="true" onAction="#onClick">
+      <Button id="changePhone" fx:id="changePhone" layoutX="587.0" layoutY="161.0" mnemonicParsing="false"  prefHeight="22.0" prefWidth="85.0" style="-fx-background-color: #FF7F50;" text="Изменить" textFill="#f7f1f1" underline="true" onAction="#backToMain">
          <font>
             <Font name="Georgia" size="14.0" />
          </font>
       </Button>
-      <Label fx:id="invalidInput" layoutX="250.0" layoutY="185.0" prefHeight="4.0" prefWidth="320.0" textFill="#ff0909">
+      <Label id="invalidInput" fx:id="invalidInput" layoutX="250.0" layoutY="221.0" prefHeight="4.0" prefWidth="320.0" textFill="#ff0909">
          <font>
             <Font name="Georgia" size="9.0" />
          </font>
       </Label>
-      <TextField fx:id="newPhone" layoutX="265.0" layoutY="161.0" prefHeight="22.0" prefWidth="294.0" promptText="Введите новый номер телефона" />
+      <TextField fx:id="newLogin" layoutX="265.0" layoutY="195.0" prefHeight="22.0" prefWidth="294.0" promptText="Введите новый логин" />
    </children>
 </AnchorPane>
