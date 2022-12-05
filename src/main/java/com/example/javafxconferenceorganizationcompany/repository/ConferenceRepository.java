@@ -16,10 +16,8 @@ public class ConferenceRepository {
         connection = con;
     }
 
-    public static ObservableList<Conference> getPersonalAssistantConferencesByID(int id) {
+    static ObservableList<Conference> getConferencesById(String sql, int id) {
         ObservableList<Conference> conferences = FXCollections.observableArrayList();
-
-        String sql = "EXEC GET_PERSONAL_ASSISTANT_CONFERENCES_BY_USER_ID ?";
         PreparedStatement request = null;
         try {
             request = connection.prepareStatement(sql);
@@ -42,5 +40,15 @@ public class ConferenceRepository {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+
+    public static ObservableList<Conference> getPersonalAssistantConferencesByID(int id) {
+        return getConferencesById("EXEC GET_PERSONAL_ASSISTANT_CONFERENCES_BY_USER_ID ?", id);
+    }
+
+    public static ObservableList<Conference> getVideographerConferencesByID(int id) {
+        return getConferencesById("EXEC GET_VIDEOGRAPHER_CONFERENCES_BY_USER_ID ?", id);
+
     }
 }

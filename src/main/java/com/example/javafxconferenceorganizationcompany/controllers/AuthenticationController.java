@@ -1,7 +1,7 @@
 package com.example.javafxconferenceorganizationcompany.controllers;
 
 import com.example.javafxconferenceorganizationcompany.ConferenceOrganizationCompanyApplication;
-import com.example.javafxconferenceorganizationcompany.controllers.PersonalAssistant.PersonalAssistantMainController;
+import com.example.javafxconferenceorganizationcompany.controllers.MainPersonalAssistantAndVideographer.PersonalAssistantAndVideographerMainController;
 import com.example.javafxconferenceorganizationcompany.repository.ConferenceRepository;
 import com.example.javafxconferenceorganizationcompany.repository.UserRepository;
 import javafx.fxml.FXML;
@@ -33,6 +33,7 @@ public class AuthenticationController implements Initializable {
     @FXML
     private Label invalidLoginOrPassword;
 
+
     @FXML
     protected void onEnterClick() throws NoSuchAlgorithmException {
 
@@ -58,19 +59,20 @@ public class AuthenticationController implements Initializable {
                     UserRepository userRepository = new UserRepository(connection);
                     ConferenceRepository conferenceRepository = new ConferenceRepository(connection);
                     login.getScene().getWindow().getOnCloseRequest();
-                    switch (roleId) {////переносим на главную вкладку роли
-                        case 1:
-                        case 2:
-                            FXMLLoader fxmlLoader = new FXMLLoader(ConferenceOrganizationCompanyApplication.class.getResource("personal-assistant-main-view.fxml"));
-                            Scene newScene = new Scene(fxmlLoader.load(), 700, 700);
-                            PersonalAssistantMainController controller = fxmlLoader.getController();
-                            controller.setConferenceRepository(conferenceRepository);
-                            controller.setUserRepository(userRepository);
-                            controller.setStage(stage);
-                            controller.setId(userId);
-                            controller.setInfo();
-                            stage.setScene(newScene);
-                        case 3:
+                    ////переносим на главную вкладку роли
+                    if (roleId==1){}
+                    else {
+                        FXMLLoader fxmlLoader = new FXMLLoader(ConferenceOrganizationCompanyApplication.class.getResource("personal-assistant-videographer-main-view.fxml"));
+                        Scene newScene = new Scene(fxmlLoader.load(), 700, 700);
+                        PersonalAssistantAndVideographerMainController controller = fxmlLoader.getController();
+                        controller.setConferenceRepository(conferenceRepository);
+                        controller.setUserRepository(userRepository);
+                        controller.setStage(stage);
+                        System.out.println(roleId);
+                        controller.setRoleId(roleId);
+                        controller.setId(userId);
+                        controller.setInfo();
+                        stage.setScene(newScene);
                     }
                 } else {
                     invalidLoginOrPassword.setText("Учётная запись деактивирована");

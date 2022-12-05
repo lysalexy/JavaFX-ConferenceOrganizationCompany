@@ -1,4 +1,4 @@
-package com.example.javafxconferenceorganizationcompany.controllers.PersonalAssistant;
+package com.example.javafxconferenceorganizationcompany.controllers.MainPersonalAssistantAndVideographer;
 
 import com.example.javafxconferenceorganizationcompany.ConferenceOrganizationCompanyApplication;
 import com.example.javafxconferenceorganizationcompany.models.Conference;
@@ -23,11 +23,13 @@ import java.net.URL;
 
 import java.util.ResourceBundle;
 
-public class PersonalAssistantMainController implements Initializable {
-    UserRepository userRepository;
-    ConferenceRepository conferenceRepository;
-    Stage stage;
-    Integer id;
+public class PersonalAssistantAndVideographerMainController implements Initializable {
+    private UserRepository userRepository;
+    private ConferenceRepository conferenceRepository;
+    private Stage stage;
+    private Integer id;
+
+    private Integer roleId;
 
     @FXML
     private TableView<Conference> conferences;
@@ -68,7 +70,7 @@ public class PersonalAssistantMainController implements Initializable {
 
     public void setConferenceRepository (ConferenceRepository conferenceRep){
         conferenceRepository=conferenceRep;
-    };
+    }
 
     public void setStage(Stage st) {
         stage = st;
@@ -76,6 +78,10 @@ public class PersonalAssistantMainController implements Initializable {
 
     public void setId(Integer i) {
         id = i;
+    }
+
+    public void setRoleId(Integer role){
+        roleId=role;
     }
 
     public void setInfo(){
@@ -87,9 +93,15 @@ public class PersonalAssistantMainController implements Initializable {
         birthDay.setText(user.getBirthDate());
         email.setText(user.getEmail());
 
-        ObservableList<Conference> confs= conferenceRepository.getPersonalAssistantConferencesByID(id);
+        ObservableList<Conference> confs = null;
 
-        // устанавливаем тип и значение которое должно хранится в колонке
+        if (roleId==2){
+            confs=conferenceRepository.getPersonalAssistantConferencesByID(id);
+        }
+        else{
+            System.out.println(roleId);
+            confs=conferenceRepository.getVideographerConferencesByID(id);
+        }
 
         startColumn.setCellValueFactory(new PropertyValueFactory<>("startTime"));
 //        startColumn.setCellValueFactory(cell -> cell.setWarpText(true));
@@ -101,12 +113,9 @@ public class PersonalAssistantMainController implements Initializable {
 
         // заполняем таблицу данными
         conferences.setItems(confs);
-
-
-
     }
     public void onClickChangePassword(){
-        FXMLLoader fxmlLoader = new FXMLLoader(ConferenceOrganizationCompanyApplication.class.getResource("personal-assistant-change-password.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(ConferenceOrganizationCompanyApplication.class.getResource("personal-assistant-videographer-change-password.fxml"));
         Scene newScene = null;
         try {
             newScene = new Scene(fxmlLoader.load(), 700, 700);
@@ -114,8 +123,10 @@ public class PersonalAssistantMainController implements Initializable {
             throw new RuntimeException(e);
         }
         ChangePasswordController controller = fxmlLoader.getController();
+        controller.setConferenceRepository(conferenceRepository);
         controller.setUserRepository(userRepository);
         controller.setStage(stage);
+        controller.setRoleId(roleId);
         controller.setId(id);
         controller.setInfo();
         stage.setScene(newScene);
@@ -123,7 +134,7 @@ public class PersonalAssistantMainController implements Initializable {
     }
 
     public void onClickChangeLogin(){
-        FXMLLoader fxmlLoader = new FXMLLoader(ConferenceOrganizationCompanyApplication.class.getResource("personal-assistant-change-login.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(ConferenceOrganizationCompanyApplication.class.getResource("personal-assistant-videographer-change-login.fxml"));
         Scene newScene = null;
         try {
             newScene = new Scene(fxmlLoader.load(), 700, 700);
@@ -131,8 +142,10 @@ public class PersonalAssistantMainController implements Initializable {
             throw new RuntimeException(e);
         }
         ChangeLoginController controller = fxmlLoader.getController();
+        controller.setConferenceRepository(conferenceRepository);
         controller.setUserRepository(userRepository);
         controller.setStage(stage);
+        controller.setRoleId(roleId);
         controller.setId(id);
         controller.setInfo();
         stage.setScene(newScene);
@@ -140,7 +153,7 @@ public class PersonalAssistantMainController implements Initializable {
     }
 
     public void onClickChangeEmail(){
-        FXMLLoader fxmlLoader = new FXMLLoader(ConferenceOrganizationCompanyApplication.class.getResource("personal-assistant-change-email.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(ConferenceOrganizationCompanyApplication.class.getResource("personal-assistant-videographer-change-email.fxml"));
         Scene newScene = null;
         try {
             newScene = new Scene(fxmlLoader.load(), 700, 700);
@@ -148,15 +161,17 @@ public class PersonalAssistantMainController implements Initializable {
             throw new RuntimeException(e);
         }
         ChangeEmailController controller = fxmlLoader.getController();
+        controller.setConferenceRepository(conferenceRepository);
         controller.setUserRepository(userRepository);
         controller.setStage(stage);
+        controller.setRoleId(roleId);
         controller.setId(id);
         controller.setInfo();
         stage.setScene(newScene);
 
     }
     public void onClickChangePhoneNumber(){
-        FXMLLoader fxmlLoader = new FXMLLoader(ConferenceOrganizationCompanyApplication.class.getResource("personal-assistant-change-phone.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(ConferenceOrganizationCompanyApplication.class.getResource("personal-assistant-videographer-change-phone.fxml"));
         Scene newScene = null;
         try {
             newScene = new Scene(fxmlLoader.load(), 700, 700);
@@ -164,8 +179,10 @@ public class PersonalAssistantMainController implements Initializable {
             throw new RuntimeException(e);
         }
         ChangePhoneNumberController controller = fxmlLoader.getController();
+        controller.setConferenceRepository(conferenceRepository);
         controller.setUserRepository(userRepository);
         controller.setStage(stage);
+        controller.setRoleId(roleId);
         controller.setId(id);
         controller.setInfo();
         stage.setScene(newScene);
