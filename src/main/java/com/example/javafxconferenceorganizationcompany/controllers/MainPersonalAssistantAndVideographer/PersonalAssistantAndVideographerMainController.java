@@ -1,6 +1,7 @@
 package com.example.javafxconferenceorganizationcompany.controllers.MainPersonalAssistantAndVideographer;
 
 import com.example.javafxconferenceorganizationcompany.ConferenceOrganizationCompanyApplication;
+import com.example.javafxconferenceorganizationcompany.controllers.Conference.MainPersonalAssistantConferenceWithVideoController;
 import com.example.javafxconferenceorganizationcompany.controllers.Conference.MainVideographerConferenceController;
 import com.example.javafxconferenceorganizationcompany.models.Conference;
 import com.example.javafxconferenceorganizationcompany.models.User;
@@ -118,7 +119,6 @@ public class PersonalAssistantAndVideographerMainController implements Initializ
 
             EventHandler<ActionEvent> handler = null;
             if (roleId == 3) {
-
                 handler = event -> {
                     FXMLLoader fxmlLoader = new FXMLLoader(ConferenceOrganizationCompanyApplication.class.getResource("videographer-conference-view.fxml"));
                     Scene newScene = null;
@@ -140,6 +140,26 @@ public class PersonalAssistantAndVideographerMainController implements Initializ
                     stage.setScene(newScene);
                 };
             } else {
+                handler = event -> {
+                    FXMLLoader fxmlLoader = new FXMLLoader(ConferenceOrganizationCompanyApplication.class.getResource("personal-assistant-conference-view-with-video-or-photo.fxml"));
+                    Scene newScene = null;
+                    try {
+                        newScene = new Scene(fxmlLoader.load(), 700, 700);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                    MainPersonalAssistantConferenceWithVideoController controller = fxmlLoader.getController();
+                    controller.setConnection(connection);
+                    controller.setConferenceRepository(conferenceRepository);
+                    controller.setCompanyRepository(new CompanyRepository(connection));
+                    controller.setPersonalAssistantId(id);
+                    controller.setStage(stage);
+                    System.out.println(id);
+                    controller.setConferenceId(conf.getConferenceId());
+                    System.out.println(conf.getConferenceId());
+                    controller.setInfo();
+                    stage.setScene(newScene);
+                };
 
             }
 

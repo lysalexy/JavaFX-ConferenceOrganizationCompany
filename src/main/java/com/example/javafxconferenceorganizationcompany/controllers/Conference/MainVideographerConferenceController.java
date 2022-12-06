@@ -17,8 +17,6 @@ import java.sql.Connection;
 
 public class MainVideographerConferenceController {
     @FXML
-    private Button backToMain;
-    @FXML
     private Label FIO;
     @FXML
     private Label amount;

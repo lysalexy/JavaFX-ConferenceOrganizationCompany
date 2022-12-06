@@ -1,6 +1,7 @@
 package com.example.javafxconferenceorganizationcompany.models;
 
 import javafx.beans.property.*;
+import javafx.scene.control.Button;
 
 public class VideoAndPhotoShooting {
     private IntegerProperty videoAndPhotoId;
@@ -11,6 +12,8 @@ public class VideoAndPhotoShooting {
     private BooleanProperty videoIsRequired;
     private IntegerProperty conferenceId;
 
+    private Button delete;
+
     public VideoAndPhotoShooting(){
         videoAndPhotoId=new SimpleIntegerProperty();
         videographerId=new SimpleIntegerProperty();
@@ -19,6 +22,8 @@ public class VideoAndPhotoShooting {
         photoIsRequired=new SimpleBooleanProperty();
         videoIsRequired=new SimpleBooleanProperty();
         conferenceId=new SimpleIntegerProperty();
+        delete=new Button("Удалить");
+        delete.setStyle("-fx-background-color: #FF7F50;-fx-textFill:#f4f2f2");
     }
 
     public void setVideoAndPhotoId(int id) {
@@ -43,6 +48,9 @@ public class VideoAndPhotoShooting {
         conferenceId.set(id);
     }
 
+    public void setDelete(Button delete){
+        this.delete=delete;
+    }
 
     public int getVideoAndPhotoId() {
         return videoAndPhotoId.get();
@@ -64,5 +72,9 @@ public class VideoAndPhotoShooting {
     }
     public int getConferenceId() {
         return conferenceId.get();
+    }
+
+    public Button getDelete() {
+        return delete;
     }
 }
