@@ -19,6 +19,9 @@ module com.example.javafxconferenceorganizationcompany {
     exports com.example.javafxconferenceorganizationcompany.controllers.MainPersonalAssistantAndVideographer;
     opens com.example.javafxconferenceorganizationcompany.controllers.MainPersonalAssistantAndVideographer to javafx.fxml;
 
+    exports com.example.javafxconferenceorganizationcompany.controllers.MainAdmin;
+    opens com.example.javafxconferenceorganizationcompany.controllers.MainAdmin to javafx.fxml;
+
     opens com.example.javafxconferenceorganizationcompany.models to javafx.fxml;
     exports com.example.javafxconferenceorganizationcompany.models;
 }

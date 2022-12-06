@@ -1,6 +1,7 @@
 package com.example.javafxconferenceorganizationcompany.controllers;
 
 import com.example.javafxconferenceorganizationcompany.ConferenceOrganizationCompanyApplication;
+import com.example.javafxconferenceorganizationcompany.controllers.MainAdmin.AdministratorMainController;
 import com.example.javafxconferenceorganizationcompany.controllers.MainPersonalAssistantAndVideographer.PersonalAssistantAndVideographerMainController;
 import com.example.javafxconferenceorganizationcompany.repository.ConferenceRepository;
 import com.example.javafxconferenceorganizationcompany.repository.UserRepository;
@@ -60,7 +61,18 @@ public class AuthenticationController implements Initializable {
                     ConferenceRepository conferenceRepository = new ConferenceRepository(connection);
                     login.getScene().getWindow().getOnCloseRequest();
                     ////переносим на главную вкладку роли
-                    if (roleId==1){}
+                    if (roleId==1){
+                        FXMLLoader fxmlLoader = new FXMLLoader(ConferenceOrganizationCompanyApplication.class.getResource("administrator-main.fxml"));
+                        Scene newScene = new Scene(fxmlLoader.load(), 700, 700);
+                        AdministratorMainController controller = fxmlLoader.getController();
+                        controller.setUserRepository(userRepository);
+                        controller.setStage(stage);
+                        System.out.println(roleId);
+                        controller.setRoleId(roleId);
+                        controller.setId(userId);
+                        controller.setInfo();
+                        stage.setScene(newScene);
+                    }
                     else {
                         FXMLLoader fxmlLoader = new FXMLLoader(ConferenceOrganizationCompanyApplication.class.getResource("personal-assistant-videographer-main-view.fxml"));
                         Scene newScene = new Scene(fxmlLoader.load(), 700, 700);

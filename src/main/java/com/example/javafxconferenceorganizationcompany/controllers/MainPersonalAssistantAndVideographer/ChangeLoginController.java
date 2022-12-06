@@ -134,19 +134,6 @@ public class ChangeLoginController implements Initializable {
         String input = UserRepository.changeLogin(id, newLog);
         if (input.equals("")) {
             backToMain();
-//            FXMLLoader fxmlLoader = new FXMLLoader(ConferenceOrganizationCompanyApplication.class.getResource("personal-assistant-main-view.fxml"));
-//            Scene newScene = null;
-//            try {
-//                newScene = new Scene(fxmlLoader.load(), 700, 700);
-//            } catch (IOException e) {
-//                throw new RuntimeException(e);
-//            }
-//            PersonalAssistantMainController controller = fxmlLoader.getController();
-//            controller.setUserRepository(userRepository);
-//            controller.setStage(stage);
-//            controller.setId(id);
-//            controller.setInfo();
-//            stage.setScene(newScene);
         }
         else{
             invalidInput.setText(input);
