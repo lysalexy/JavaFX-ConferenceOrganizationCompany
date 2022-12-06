@@ -11,7 +11,7 @@ public class Company {
     private StringProperty mainParticipantFIO;
     private StringProperty mainParticipantContactTelephoneNumber;
 
-    Company(){
+    public Company(){
         companyId=new SimpleIntegerProperty();
         companyName=new SimpleStringProperty();
         mainParticipantFIO=new SimpleStringProperty();

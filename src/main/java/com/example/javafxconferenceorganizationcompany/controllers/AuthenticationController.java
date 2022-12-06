@@ -3,6 +3,7 @@ package com.example.javafxconferenceorganizationcompany.controllers;
 import com.example.javafxconferenceorganizationcompany.ConferenceOrganizationCompanyApplication;
 import com.example.javafxconferenceorganizationcompany.controllers.MainAdmin.AdministratorMainController;
 import com.example.javafxconferenceorganizationcompany.controllers.MainPersonalAssistantAndVideographer.PersonalAssistantAndVideographerMainController;
+import com.example.javafxconferenceorganizationcompany.repository.CompanyRepository;
 import com.example.javafxconferenceorganizationcompany.repository.ConferenceRepository;
 import com.example.javafxconferenceorganizationcompany.repository.UserRepository;
 import javafx.fxml.FXML;
@@ -59,6 +60,7 @@ public class AuthenticationController implements Initializable {
                 if (isActive) {
                     UserRepository userRepository = new UserRepository(connection);
                     ConferenceRepository conferenceRepository = new ConferenceRepository(connection);
+
                     login.getScene().getWindow().getOnCloseRequest();
                     ////переносим на главную вкладку роли
                     if (roleId==1){
@@ -78,6 +80,7 @@ public class AuthenticationController implements Initializable {
                         Scene newScene = new Scene(fxmlLoader.load(), 700, 700);
                         PersonalAssistantAndVideographerMainController controller = fxmlLoader.getController();
                         controller.setConferenceRepository(conferenceRepository);
+                        controller.setConnection(connection);
                         controller.setUserRepository(userRepository);
                         controller.setStage(stage);
                         System.out.println(roleId);

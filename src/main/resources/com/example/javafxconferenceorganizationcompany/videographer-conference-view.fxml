@@ -6,18 +6,13 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="700.0" style="-fx-background-color: #FFDAB9;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javafxconferenceorganizationcompany.controllers.MainPersonalAssistantAndVideographer.PersonalAssistantAndVideographerMainController">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="700.0" style="-fx-background-color: #FFDAB9;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javafxconferenceorganizationcompany.controllers.Conference.MainVideographerConferenceController">
    <children>
       <AnchorPane prefHeight="89.0" prefWidth="700.0" style="-fx-background-color: #FF7F50;">
          <children>
-            <Label layoutX="68.0" layoutY="21.0" prefHeight="46.0" prefWidth="206.0" text="Конференция" textAlignment="JUSTIFY" textFill="#faf6f6">
+            <Label layoutX="219.0" layoutY="19.0" prefHeight="52.0" prefWidth="339.0" text="Конференция" textAlignment="JUSTIFY" textFill="#faf6f6">
                <font>
-                  <Font name="Georgia" size="25.0" />
-               </font>
-            </Label>
-            <Label id="conferenceName" layoutX="265.0" layoutY="21.0" prefHeight="46.0" prefWidth="400.0" textAlignment="JUSTIFY" textFill="#f7f7f7">
-               <font>
-                  <Font name="Georgia Italic" size="27.0" />
+                  <Font name="Georgia" size="33.0" />
                </font>
             </Label>
          </children>
@@ -42,45 +37,45 @@
             <Font name="Georgia Italic" size="16.0" />
          </font>
       </Label>
-      <Label id="finish" fx:id="birthDay" layoutX="270.0" layoutY="179.0" prefHeight="30.0" prefWidth="274.0" />
-      <Label id="start" fx:id="FIO" layoutX="263.0" layoutY="151.0" prefHeight="26.0" prefWidth="282.0" />
+      <Label fx:id="finish" layoutX="270.0" layoutY="179.0" prefHeight="30.0" prefWidth="274.0" />
+      <Label fx:id="start" layoutX="263.0" layoutY="151.0" prefHeight="26.0" prefWidth="282.0" />
       <Label layoutX="26.0" layoutY="354.0" prefHeight="18.0" prefWidth="162.0" text="Компания-заказчик">
          <font>
             <Font name="Georgia Italic" size="16.0" />
          </font>
       </Label>
-      <Label id="companyName" fx:id="phoneNumber" layoutX="370.0" layoutY="347.0" prefHeight="30.0" prefWidth="282.0" />
+      <Label fx:id="companyName" layoutX="370.0" layoutY="347.0" prefHeight="30.0" prefWidth="282.0" />
       <Label layoutX="22.0" layoutY="526.0" prefHeight="22.0" prefWidth="249.0" text="Контактный номер телефона">
          <font>
             <Font name="Georgia Italic" size="16.0" />
          </font>
       </Label>
-      <Label id="personalAssistant" layoutX="22.0" layoutY="494.0" prefHeight="22.0" prefWidth="327.0" text="Личный помощник">
+      <Label layoutX="22.0" layoutY="494.0" prefHeight="22.0" prefWidth="327.0" text="Личный помощник">
          <font>
             <Font name="Georgia Italic" size="16.0" />
          </font>
       </Label>
-      <Label id="personalAssistant" fx:id="phoneNumber111" layoutX="363.0" layoutY="497.0" prefHeight="26.0" prefWidth="327.0" />
-      <Label id="personalAssistantPhone" fx:id="phoneNumber1111" layoutX="360.0" layoutY="529.0" prefHeight="26.0" prefWidth="327.0" />
-      <CheckBox id="videoIsRequired" indeterminate="true" layoutX="329.0" layoutY="108.0" mnemonicParsing="false" style="-fx-opacity: 1;" text="требуется видеосъёмка">
+      <Label fx:id="personalAssistant" layoutX="363.0" layoutY="497.0" prefHeight="26.0" prefWidth="327.0" />
+      <Label fx:id="personalAssistantPhone" layoutX="360.0" layoutY="529.0" prefHeight="26.0" prefWidth="327.0" />
+      <CheckBox fx:id="videoIsRequired" layoutX="329.0" layoutY="108.0" mnemonicParsing="false"  text="требуется видеосъёмка">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </CheckBox>
-      <CheckBox id="photoIsRequired" indeterminate="true" layoutX="509.0" layoutY="108.0" mnemonicParsing="false" style="-fx-opacity: 1;" text="требуется фотосъёмка">
+      <CheckBox fx:id="photoIsRequired"  layoutX="509.0" layoutY="108.0" mnemonicParsing="false"  text="требуется фотосъёмка">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>
       </CheckBox>
-      <Label id="FIO" fx:id="phoneNumber1" layoutX="373.0" layoutY="382.0" prefHeight="30.0" prefWidth="282.0" />
-      <Label id="phoneNumber" fx:id="phoneNumber11" layoutX="371.0" layoutY="418.0" prefHeight="30.0" prefWidth="282.0" />
+      <Label fx:id="FIO" layoutX="373.0" layoutY="382.0" prefHeight="30.0" prefWidth="282.0" />
+      <Label fx:id="phoneNumber" layoutX="371.0" layoutY="418.0" prefHeight="30.0" prefWidth="282.0" />
       <Label layoutX="26.0" layoutY="252.0" prefHeight="11.0" prefWidth="200.0" text="Место проведения" textFill="#434242">
          <font>
             <Font name="Georgia Italic" size="16.0" />
          </font>
       </Label>
-      <Label id="locationAddress" fx:id="phoneNumber112" layoutX="260.0" layoutY="237.0" prefHeight="30.0" prefWidth="400.0" />
-      <Button layoutX="424.0" layoutY="592.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="239.0" style="-fx-background-color: #FF7F50;" text="Вернуться на главную страницу" textFill="#f4f2f2">
+      <Label fx:id="locationAddress" layoutX="260.0" layoutY="237.0" prefHeight="30.0" prefWidth="400.0" />
+      <Button fx:id="backToMain" layoutX="424.0" layoutY="592.0" mnemonicParsing="false" onAction="#backToMain" prefHeight="30.0" prefWidth="239.0" style="-fx-background-color: #FF7F50;" text="Вернуться на главную страницу" textFill="#f4f2f2">
          <font>
             <Font name="Georgia" size="14.0" />
          </font>
@@ -90,6 +85,6 @@
             <Font name="Georgia Italic" size="16.0" />
          </font>
       </Label>
-      <Label id="amount" fx:id="phoneNumber1121" layoutX="258.0" layoutY="277.0" prefHeight="30.0" prefWidth="400.0" />
+      <Label fx:id="amount" layoutX="258.0" layoutY="277.0" prefHeight="30.0" prefWidth="400.0" />
    </children>
 </AnchorPane>

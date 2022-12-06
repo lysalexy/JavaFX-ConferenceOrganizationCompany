@@ -1,11 +1,15 @@
 package com.example.javafxconferenceorganizationcompany.controllers.MainPersonalAssistantAndVideographer;
 
 import com.example.javafxconferenceorganizationcompany.ConferenceOrganizationCompanyApplication;
+import com.example.javafxconferenceorganizationcompany.controllers.Conference.MainVideographerConferenceController;
 import com.example.javafxconferenceorganizationcompany.models.Conference;
 import com.example.javafxconferenceorganizationcompany.models.User;
+import com.example.javafxconferenceorganizationcompany.repository.CompanyRepository;
 import com.example.javafxconferenceorganizationcompany.repository.ConferenceRepository;
 import com.example.javafxconferenceorganizationcompany.repository.UserRepository;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 
 import javafx.fxml.FXMLLoader;
@@ -21,9 +25,12 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
 
+import java.sql.Connection;
 import java.util.ResourceBundle;
 
 public class PersonalAssistantAndVideographerMainController implements Initializable {
+
+    private Connection connection;
     private UserRepository userRepository;
     private ConferenceRepository conferenceRepository;
     private Stage stage;
@@ -64,6 +71,10 @@ public class PersonalAssistantAndVideographerMainController implements Initializ
     @FXML
     private Label FIO;
 
+    public void setConnection(Connection con){
+        connection=con;
+    }
+
     public void setUserRepository(UserRepository userRep) {
         userRepository=userRep;
     }
@@ -101,6 +112,40 @@ public class PersonalAssistantAndVideographerMainController implements Initializ
         else{
             System.out.println(roleId);
             confs=conferenceRepository.getVideographerConferencesByID(id);
+        }
+
+        for (Conference conf : confs) {
+
+            EventHandler<ActionEvent> handler = null;
+            if (roleId == 3) {
+
+                handler = event -> {
+                    FXMLLoader fxmlLoader = new FXMLLoader(ConferenceOrganizationCompanyApplication.class.getResource("videographer-conference-view.fxml"));
+                    Scene newScene = null;
+                    try {
+                        newScene = new Scene(fxmlLoader.load(), 700, 700);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                    MainVideographerConferenceController controller = fxmlLoader.getController();
+                    controller.setConnection(connection);
+                    controller.setConferenceRepository(conferenceRepository);
+                    controller.setCompanyRepository(new CompanyRepository(connection));
+                    controller.setVideographerId(id);
+                    controller.setStage(stage);
+                    System.out.println(id);
+                    controller.setConferenceId(conf.getConferenceId());
+                    System.out.println(conf.getConferenceId());
+                    controller.setInfo();
+                    stage.setScene(newScene);
+                };
+            } else {
+
+            }
+
+            Button button = conf.getMore();////устанавливаем кнопкам обработчики
+            button.setOnAction(handler);
+            conf.setMore(button);
         }
 
         startColumn.setCellValueFactory(new PropertyValueFactory<>("startTime"));

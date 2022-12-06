@@ -16,9 +16,11 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
 import java.util.ResourceBundle;
 
 public class ChangePasswordController implements Initializable {
+    private Connection connection;
     private UserRepository userRepository;
     private ConferenceRepository conferenceRepository;
     private Stage stage;
@@ -118,6 +120,8 @@ public class ChangePasswordController implements Initializable {
         else{
             confs=conferenceRepository.getVideographerConferencesByID(id);
         }
+
+
 
         startColumn.setCellValueFactory(new PropertyValueFactory<>("startTime"));
 //        startColumn.setCellValueFactory(cell -> cell.setWarpText(true));

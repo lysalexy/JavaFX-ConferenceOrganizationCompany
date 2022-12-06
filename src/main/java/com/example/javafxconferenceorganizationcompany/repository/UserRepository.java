@@ -112,4 +112,24 @@ public class UserRepository {
             throw new RuntimeException(e);
         }
     }
+
+    public static  User getPersonalAssistantByConferenceId(int conferenceId){
+        User user = new User();
+        String sql="EXEC GET_PERSONAL_ASSISTANT_BY_CONFERENCE_ID ?";
+        PreparedStatement request = null;
+        try {
+            request = connection.prepareStatement(sql);
+            request.setInt(1, conferenceId);
+            ResultSet result = request.executeQuery();
+            if (result.next()) {
+                user.setFIO(result.getNString(1));
+                user.setPhoneNumber(result.getString(2));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return user;
+
+
+    }
 }

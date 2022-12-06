@@ -16,11 +16,13 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
 import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ChangePhoneNumberController implements Initializable {
+    private Connection connection;
     private UserRepository userRepository;
     private ConferenceRepository conferenceRepository;
     private Stage stage;
@@ -101,6 +103,7 @@ public class ChangePhoneNumberController implements Initializable {
         else{
             confs=conferenceRepository.getVideographerConferencesByID(id);
         }
+
 
         startColumn.setCellValueFactory(new PropertyValueFactory<>("startTime"));
 //        startColumn.setCellValueFactory(cell -> cell.setWarpText(true));

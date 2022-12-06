@@ -11,7 +11,7 @@ public class VideoAndPhotoShooting {
     private BooleanProperty videoIsRequired;
     private IntegerProperty conferenceId;
 
-    VideoAndPhotoShooting(){
+    public VideoAndPhotoShooting(){
         videoAndPhotoId=new SimpleIntegerProperty();
         videographerId=new SimpleIntegerProperty();
         videographerFIO=new SimpleStringProperty();

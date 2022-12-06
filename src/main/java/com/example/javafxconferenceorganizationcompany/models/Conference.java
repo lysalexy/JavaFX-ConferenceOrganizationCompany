@@ -37,8 +37,9 @@ public class Conference {
         mainParticipantFIO=new SimpleStringProperty();
         mainParticipantContactTelephoneNumber=new SimpleStringProperty();
         personalAssistantId=new SimpleIntegerProperty();
-        more=new Button();
-    }
+        more=new Button("Дополнительно");
+        more.setStyle("-fx-background-color: #FF7F50;-fx-textFill:#f4f2f2");
+    };
 
     public void setConferenceId(int id) {
        conferenceId.set(id);
@@ -122,5 +123,9 @@ public class Conference {
 
     public Button getMore() {
         return more;
+    }
+
+    public void setMore(Button more) {
+        this.more = more;
     }
 }
