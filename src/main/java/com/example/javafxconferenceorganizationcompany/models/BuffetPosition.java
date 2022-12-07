@@ -4,6 +4,7 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.scene.control.Button;
 
 public class BuffetPosition {
     private IntegerProperty buffetPositionId;
@@ -12,12 +13,23 @@ public class BuffetPosition {
     private IntegerProperty conferenceId;
     private IntegerProperty dishesAmount;
 
+    private Button delete;
+
     public BuffetPosition(){
         buffetPositionId=new SimpleIntegerProperty();
         dishesId=new SimpleIntegerProperty();
         dishesName=new SimpleStringProperty();
         conferenceId=new SimpleIntegerProperty();
         dishesAmount=new SimpleIntegerProperty();
+        delete=new Button("Удалить");
+        delete.setStyle("-fx-background-color: #FF7F50;-fx-textFill:#f4f2f2");
+    }
+    public Button getDelete() {
+        return delete;
+    }
+
+    public void setDelete(Button delete) {
+        this.delete = delete;
     }
 
     public void setBuffetPositionId(int id) {

@@ -4,6 +4,7 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.scene.control.Button;
 
 public class User {
     private IntegerProperty userId;
@@ -14,6 +15,8 @@ public class User {
     private StringProperty email;
     private StringProperty roleName;
 
+    private Button delete;
+
     public User()
     {
         userId=new SimpleIntegerProperty();
@@ -23,6 +26,16 @@ public class User {
         birthDate=new SimpleStringProperty();
         email=new SimpleStringProperty();
         roleName=new SimpleStringProperty();
+        delete=new Button("Удалить");
+        delete.setStyle("-fx-background-color: #FF7F50;-fx-textFill:#f4f2f2");
+    }
+
+    public Button getDelete() {
+        return delete;
+    }
+
+    public void setDelete(Button delete) {
+        this.delete = delete;
     }
 
     public void setUserId(int id){

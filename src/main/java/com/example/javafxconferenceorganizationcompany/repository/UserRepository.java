@@ -11,6 +11,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class UserRepository {
@@ -140,11 +141,11 @@ public class UserRepository {
             request = connection.prepareStatement(sql);
 
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
-            LocalDate startD=LocalDate.parse(start,formatter);
-            LocalDate finishD=LocalDate.parse(finish,formatter);
+            LocalDateTime startD=LocalDateTime.parse(start,formatter);
+            LocalDateTime finishD=LocalDateTime.parse(finish,formatter);
 
-            request.setDate(1, Date.valueOf(startD));
-            request.setDate(2, Date.valueOf(finishD));
+            request.setTimestamp(1, Timestamp.valueOf(startD));
+            request.setTimestamp(2, Timestamp.valueOf(finishD));
             ResultSet res = request.executeQuery();
             while (res.next()) {
                 User videogr = new User();
@@ -161,7 +162,7 @@ public class UserRepository {
     }
     public static User getVideographerByFIO(String FIO){
         User user = new User();
-        String sql="SELECT * FROM Users WHERE roleId=3 AND FIO=?";
+        String sql="SELECT TOP 1 * FROM Users WHERE roleId=3 AND FIO=?";
         PreparedStatement request = null;
         try {
             request = connection.prepareStatement(sql);

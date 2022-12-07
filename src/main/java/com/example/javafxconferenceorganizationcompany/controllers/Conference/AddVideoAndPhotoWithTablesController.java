@@ -1,6 +1,7 @@
 package com.example.javafxconferenceorganizationcompany.controllers.Conference;
 
 import com.example.javafxconferenceorganizationcompany.ConferenceOrganizationCompanyApplication;
+import com.example.javafxconferenceorganizationcompany.controllers.Buffet.MainBuffetController;
 import com.example.javafxconferenceorganizationcompany.controllers.MainPersonalAssistantAndVideographer.PersonalAssistantAndVideographerMainController;
 import com.example.javafxconferenceorganizationcompany.models.*;
 import com.example.javafxconferenceorganizationcompany.repository.*;
@@ -22,7 +23,7 @@ public class AddVideoAndPhotoWithTablesController {
     @FXML
     private Button add;
     @FXML
-    private ComboBox newVideographer;
+    private ComboBox<String> newVideographer;
     @FXML
     private Label bujet;
     @FXML
@@ -139,22 +140,6 @@ public class AddVideoAndPhotoWithTablesController {
             EventHandler<ActionEvent> handler = event -> {
                 System.out.println(shoot.getVideoAndPhotoId());
                 videoAndPhotoShootingRepository.deleteVideoAndPhotoShootingByShootingId(shoot.getVideoAndPhotoId());
-//                FXMLLoader fxmlLoader = new FXMLLoader(ConferenceOrganizationCompanyApplication.class.getResource("personal-assistant-conference-view-with-video-or-photo.fxml"));
-//                Scene newScene = null;
-//                try {
-//                    newScene = new Scene(fxmlLoader.load(), 700, 700);
-//                } catch (IOException e) {
-//                    throw new RuntimeException(e);
-//                }
-//                MainPersonalAssistantConferenceWithVideoController controller = fxmlLoader.getController();
-//                controller.setConnection(connection);
-//                controller.setConferenceRepository(conferenceRepository);
-//                controller.setCompanyRepository(new CompanyRepository(connection));
-//                controller.setPersonalAssistantId(personalAssistantId);
-//                controller.setStage(stage);
-//                controller.setConferenceId(conferenceId);
-//                controller.setInfo();
-//                stage.setScene(newScene);
                 backToConferenceMain();
             };
 
@@ -182,16 +167,9 @@ public class AddVideoAndPhotoWithTablesController {
         }
 
         newVideographer.setItems(videogrFIO);
-//        ObservableList<String> langs = FXCollections.observableArrayList("Java", "JavaScript", "C#", "Python");
-//        ComboBox<String> langsComboBox = new ComboBox<String>(langs);
-//        langsComboBox.setValue("Java"); // устанавливаем выбранный элемент по умолчанию
-//
-//        Label lbl = new Label();
-//
-//        // получаем выбранный элемент
-//        langsComboBox.setOnAction(event -> lbl.setText(langsComboBox.getValue()));
 
         add.setOnAction(event -> {
+            System.out.println((String) newVideographer.getValue());
                     User us = userRepository.getVideographerByFIO((String) newVideographer.getValue());
                     addVideographer(conferenceId, isPhotoRequired, isVideoRequired, us.getUserId());
                 }
@@ -216,7 +194,6 @@ public class AddVideoAndPhotoWithTablesController {
         controller.setId(personalAssistantId);
         controller.setInfo();
         stage.setScene(newScene);
-
     }
 
     public void backToConferenceMain() {
@@ -229,11 +206,11 @@ public class AddVideoAndPhotoWithTablesController {
         }
         MainPersonalAssistantConferenceWithVideoController controller = fxmlLoader.getController();
         controller.setConnection(connection);
-        controller.setConferenceRepository(conferenceRepository);
         controller.setCompanyRepository(new CompanyRepository(connection));
+        controller.setConferenceId(conferenceId);
+        controller.setConferenceRepository(conferenceRepository);
         controller.setPersonalAssistantId(personalAssistantId);
         controller.setStage(stage);
-        controller.setConferenceId(conferenceId);
         controller.setInfo();
         stage.setScene(newScene);
     }
@@ -244,5 +221,24 @@ public class AddVideoAndPhotoWithTablesController {
         videoAndPhotoShooting.addVideoAndPhotoShootingByShooting(conferenceId, isPhotoRequired, isVideoRequired, videographerId);
         ////после добавления возвращаемся на главную
         backToConferenceMain();
+    }
+
+    public void getBuffet(){
+        FXMLLoader fxmlLoader = new FXMLLoader(ConferenceOrganizationCompanyApplication.class.getResource("buffet-menu.fxml"));
+        Scene newScene = null;
+        try {
+            newScene = new Scene(fxmlLoader.load(), 700, 700);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        MainBuffetController controller = fxmlLoader.getController();
+        controller.setConnection(connection);
+        controller.setCompanyRepository(new CompanyRepository(connection));
+        controller.setConferenceId(conferenceId);
+        controller.setConferenceRepository(conferenceRepository);
+        controller.setPersonalAssistantId(personalAssistantId);
+        controller.setStage(stage);
+        controller.setInfo();
+        stage.setScene(newScene);
     }
 }

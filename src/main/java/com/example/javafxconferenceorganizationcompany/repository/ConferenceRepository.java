@@ -58,7 +58,8 @@ public class ConferenceRepository {
         PreparedStatement request = null;
         try {
             request = connection.prepareStatement(sql);
-            request.setInt(1, id);
+            request.setInt(1,id);
+            System.out.println(id);
             ResultSet res = request.executeQuery();
             if (res.next()) {
                 Conference conf = new Conference();
@@ -67,7 +68,7 @@ public class ConferenceRepository {
                 conf.setFinishTime(res.getString(3));
                 conf.setParticipantsAmount(res.getInt(4));
                 conf.setBudjet(res.getInt(5));
-                conf.setConferenceDescription(res.getString(6));
+                conf.setConferenceDescription(res.getNString(6));
                 conf.setConferenceLocationId(res.getInt(7));
                 conf.setCompanyId(res.getInt(8));
                 conf.setPersonalAssistantId(res.getInt(9));

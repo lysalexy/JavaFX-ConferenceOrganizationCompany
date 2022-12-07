@@ -7,7 +7,8 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="700.0" style="-fx-background-color: #FFDAB9;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javafxconferenceorganizationcompany.controllers.MainPersonalAssistantAndVideographer.PersonalAssistantAndVideographerMainController">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="700.0" style="-fx-background-color: #FFDAB9;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.javafxconferenceorganizationcompany.controllers.Buffet.MainBuffetController">
    <children>
       <AnchorPane prefHeight="89.0" prefWidth="700.0" style="-fx-background-color: #FF7F50;">
          <children>
@@ -18,26 +19,24 @@
             </Label>
          </children>
       </AnchorPane>
-      <Label id="personalAssistant" fx:id="phoneNumber111" layoutX="363.0" layoutY="574.0" prefHeight="26.0" prefWidth="327.0" />
-      <Label id="personalAssistantPhone" fx:id="phoneNumber1111" layoutX="360.0" layoutY="606.0" prefHeight="26.0" prefWidth="327.0" />
-      <Button id="backToMain" layoutX="424.0" layoutY="645.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="239.0" style="-fx-background-color: #FF7F50;" text="Вернуться на главную страницу" textFill="#f4f2f2">
+      <Button id="backToMain" onAction="#backToMain" layoutX="424.0" layoutY="645.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="239.0" style="-fx-background-color: #FF7F50;" text="Вернуться на главную страницу" textFill="#f4f2f2">
          <font>
             <Font name="Georgia" size="14.0" />
          </font>
       </Button>
-      <Button id="backT0Conference" layoutX="27.0" layoutY="645.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="239.0" style="-fx-background-color: #FF7F50;" text="Вернуться к конференции" textFill="#f4f2f2">
+      <Button id="backToConference" onAction="#backToConference" layoutX="27.0" layoutY="645.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="239.0" style="-fx-background-color: #FF7F50;" text="Вернуться к конференции" textFill="#f4f2f2">
          <font>
             <Font name="Georgia" size="14.0" />
          </font>
       </Button>
-      <TableView layoutX="19.0" layoutY="112.0" prefHeight="161.0" prefWidth="662.0">
+      <TableView fx:id='buffetPositionsTable' layoutX="19.0" layoutY="112.0" prefHeight="161.0" prefWidth="662.0">
         <columns>
-          <TableColumn prefWidth="312.79999351501465" text="Наименование блюда" />
-          <TableColumn prefWidth="143.20001220703125" text="Количество" />
-            <TableColumn prefWidth="204.00003051757812" text="Удалить" />
+          <TableColumn fx:id='dishNamePosColumn' prefWidth="312.79999351501465" text="Наименование блюда" />
+          <TableColumn fx:id='amountColumn' prefWidth="143.20001220703125" text="Количество" />
+            <TableColumn fx:id='deleteColumn' prefWidth="204.00003051757812" text="Удалить" />
         </columns>
       </TableView>
-      <Button id="add" layoutX="429.0" layoutY="574.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="229.0" style="-fx-background-color: #FF7F50;" text="Добавить блюдо в фуршетное меню" textFill="#fcfbfb">
+      <Button fx:id="add" onAction="#add" layoutX="429.0" layoutY="574.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="229.0" style="-fx-background-color: #FF7F50;" text="Добавить блюдо в фуршетное меню" textFill="#fcfbfb">
          <font>
             <Font name="Georgia" size="12.0" />
          </font>
@@ -47,11 +46,11 @@
             <Font name="Georgia" size="22.0" />
          </font>
       </Label>
-      <TableView layoutX="18.0" layoutY="346.0" prefHeight="184.0" prefWidth="662.0">
+      <TableView fx:id='dishesTable' layoutX="18.0" layoutY="346.0" prefHeight="184.0" prefWidth="662.0">
          <columns>
-            <TableColumn prefWidth="192.0000057220459" text="Наименование блюда" />
-            <TableColumn prefWidth="220.79998779296875" text="Состав" />
-            <TableColumn prefWidth="248.00003051757812" text="Стоимость одной позиции(в рублях)" />
+            <TableColumn fx:id='dishNameColumn' prefWidth="192.0000057220459" text="Наименование блюда" />
+            <TableColumn fx:id='compositionColumn' prefWidth="220.79998779296875" text="Состав" />
+            <TableColumn fx:id='costPerPositionColumn' prefWidth="248.00003051757812" text="Стоимость одной позиции(в рублях)" />
          </columns>
       </TableView>
    </children>

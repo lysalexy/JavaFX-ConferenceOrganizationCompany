@@ -25,6 +25,9 @@ module com.example.javafxconferenceorganizationcompany {
     exports com.example.javafxconferenceorganizationcompany.controllers.Conference;
     opens com.example.javafxconferenceorganizationcompany.controllers.Conference to javafx.fxml;
 
+    exports com.example.javafxconferenceorganizationcompany.controllers.Buffet;
+    opens com.example.javafxconferenceorganizationcompany.controllers.Buffet to javafx.fxml;
+
     opens com.example.javafxconferenceorganizationcompany.models to javafx.fxml;
     exports com.example.javafxconferenceorganizationcompany.models;
 }

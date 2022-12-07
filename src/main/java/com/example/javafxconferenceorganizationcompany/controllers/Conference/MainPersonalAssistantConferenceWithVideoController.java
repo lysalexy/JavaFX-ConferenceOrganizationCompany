@@ -1,6 +1,7 @@
 package com.example.javafxconferenceorganizationcompany.controllers.Conference;
 
 import com.example.javafxconferenceorganizationcompany.ConferenceOrganizationCompanyApplication;
+import com.example.javafxconferenceorganizationcompany.controllers.Buffet.MainBuffetController;
 import com.example.javafxconferenceorganizationcompany.controllers.MainPersonalAssistantAndVideographer.PersonalAssistantAndVideographerMainController;
 import com.example.javafxconferenceorganizationcompany.models.*;
 import com.example.javafxconferenceorganizationcompany.repository.*;
@@ -182,7 +183,6 @@ public class MainPersonalAssistantConferenceWithVideoController {
 
                 }
             }
-
         };
 
         videoIsRequired.setOnAction(event);
@@ -238,6 +238,24 @@ public class MainPersonalAssistantConferenceWithVideoController {
         controller.setId(personalAssistantId);
         controller.setInfo();
         stage.setScene(newScene);
+    }
 
+    public void getBuffet(){
+        FXMLLoader fxmlLoader = new FXMLLoader(ConferenceOrganizationCompanyApplication.class.getResource("buffet-menu.fxml"));
+        Scene newScene = null;
+        try {
+            newScene = new Scene(fxmlLoader.load(), 700, 700);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        MainBuffetController controller = fxmlLoader.getController();
+        controller.setConnection(connection);
+        controller.setCompanyRepository(new CompanyRepository(connection));
+        controller.setConferenceId(conferenceId);
+        controller.setConferenceRepository(conferenceRepository);
+        controller.setPersonalAssistantId(personalAssistantId);
+        controller.setStage(stage);
+        controller.setInfo();
+        stage.setScene(newScene);
     }
 }

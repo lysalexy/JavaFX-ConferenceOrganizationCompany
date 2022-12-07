@@ -18,6 +18,9 @@ public class ConferenceOrganizationCompanyApplication extends Application {
         try {
             var connection = DriverManager.getConnection(url);
 
+            connection.prepareStatement("SET LANGUAGE US_ENGLISH").executeUpdate();
+
+
             FXMLLoader fxmlLoader = new FXMLLoader(ConferenceOrganizationCompanyApplication.class.getResource("authentication-view.fxml"));
 
             Scene scene = new Scene(fxmlLoader.load(), 700, 400);
