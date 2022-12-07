@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="700.0" style="-fx-background-color: #FFDAB9;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javafxconferenceorganizationcompany.controllers.MainPersonalAssistantAndVideographer.PersonalAssistantAndVideographerMainController">
+   <children>
+      <AnchorPane prefHeight="89.0" prefWidth="700.0" style="-fx-background-color: #FF7F50;">
+         <children>
+            <Label layoutX="125.0" layoutY="21.0" prefHeight="49.0" prefWidth="453.0" text="База заказчиков и ресурсов" textAlignment="JUSTIFY" textFill="#faf6f6">
+               <font>
+                  <Font name="Georgia" size="33.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <Button id="addToBack" layoutX="435.0" layoutY="645.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="239.0" style="-fx-background-color: #FF7F50;" text="Вернуться на главную страницу" textFill="#f4f2f2">
+         <font>
+            <Font name="Georgia" size="14.0" />
+         </font>
+      </Button>
+      <TableView layoutX="19.0" layoutY="172.0" prefHeight="221.0" prefWidth="665.0">
+        <columns>
+          <TableColumn prefWidth="172.0000057220459" text="Наименование помещения" />
+          <TableColumn prefWidth="170.39996337890625" text="Физический адрес" />
+            <TableColumn prefWidth="115.99993896484375" text="Вместимость(число человек)" />
+            <TableColumn prefWidth="103.19998168945312" text="Стоимость часа аренды(в рублях)" />
+            <TableColumn prefWidth="103.19998168945312" text="Удалить" />
+        </columns>
+      </TableView>
+      <Button id="add" layoutX="515.0" layoutY="587.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="161.0" style="-fx-background-color: #FF7F50;" text="Добавить" textFill="#fcfbfb">
+         <font>
+            <Font name="Georgia" size="12.0" />
+         </font>
+      </Button>
+      <Label layoutX="36.0" layoutY="115.0" prefHeight="26.0" prefWidth="176.0" text="Помещения" textFill="#dc642c">
+         <font>
+            <Font name="Georgia" size="22.0" />
+         </font>
+      </Label>
+      <Label layoutX="31.0" layoutY="412.0" prefHeight="26.0" prefWidth="209.0" text="Наименование помещения" textFill="#dc642c">
+         <font>
+            <Font name="Georgia" size="16.0" />
+         </font>
+      </Label>
+      <TextField id="locationName" layoutX="245.0" layoutY="416.0" prefHeight="26.0" prefWidth="267.0" />
+      <Button id="buffetPositions" layoutX="177.0" layoutY="109.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="267.0" style="-fx-background-color: #FF7F50;" text="Блюда фуршетного меню" textFill="#f4f2f2">
+         <font>
+            <Font name="Georgia" size="19.0" />
+         </font>
+      </Button>
+      <Button id="buffetPositions" layoutX="457.0" layoutY="109.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="225.0" style="-fx-background-color: #FF7F50;" text="Компании-заказчики" textFill="#f4f2f2">
+         <font>
+            <Font name="Georgia" size="19.0" />
+         </font>
+      </Button>
+      <Label id="invalidLocationName" layoutX="245.0" layoutY="442.0" prefHeight="17.0" prefWidth="267.0" textFill="#ec0606">
+         <font>
+            <Font name="Georgia Italic" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="30.0" layoutY="461.0" prefHeight="26.0" prefWidth="209.0" text="Физический адрес" textFill="#dc642c">
+         <font>
+            <Font name="Georgia" size="16.0" />
+         </font>
+      </Label>
+      <TextField id="locationAddress" layoutX="244.0" layoutY="463.0" prefHeight="26.0" prefWidth="267.0" />
+      <Label id="invalidAddress" layoutX="244.0" layoutY="491.0" prefHeight="17.0" prefWidth="267.0" textFill="#ec0606">
+         <font>
+            <Font name="Georgia Italic" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="30.0" layoutY="505.0" prefHeight="26.0" prefWidth="209.0" text="Вместимость(человек)" textFill="#dc642c">
+         <font>
+            <Font name="Georgia" size="16.0" />
+         </font>
+      </Label>
+      <TextField id="locationCapacity" layoutX="244.0" layoutY="507.0" prefHeight="26.0" prefWidth="267.0" />
+      <Label id="invalidCapacity" layoutX="244.0" layoutY="535.0" prefHeight="17.0" prefWidth="267.0" textFill="#ec0606">
+         <font>
+            <Font name="Georgia Italic" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="29.0" layoutY="550.0" prefHeight="26.0" prefWidth="209.0" text="Стоимость часа аренды" textFill="#dc642c">
+         <font>
+            <Font name="Georgia" size="16.0" />
+         </font>
+      </Label>
+      <TextField id="locationCost" layoutX="243.0" layoutY="552.0" prefHeight="26.0" prefWidth="267.0" />
+      <Label id="invalidCost" layoutX="243.0" layoutY="580.0" prefHeight="17.0" prefWidth="267.0" textFill="#ec0606">
+         <font>
+            <Font name="Georgia Italic" size="12.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
