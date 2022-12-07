@@ -1,15 +1,17 @@
 package com.example.javafxconferenceorganizationcompany.repository;
 
 import com.example.javafxconferenceorganizationcompany.models.User;
+import com.example.javafxconferenceorganizationcompany.models.VideoAndPhotoShooting;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import kotlin.text.Regex;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class UserRepository {
     private static Connection connection;
@@ -127,5 +129,56 @@ public class UserRepository {
             throw new RuntimeException(e);
         }
         return user;
+    }
+
+    public static ObservableList<User> getFreeVideographers(String start, String finish){
+        ObservableList<User> freeVideographers = FXCollections.observableArrayList();
+
+        String sql = "EXEC GET_FREE_VIDEOGRAPHERS ?,?";
+        PreparedStatement request = null;
+        try {
+            request = connection.prepareStatement(sql);
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
+            LocalDate startD=LocalDate.parse(start,formatter);
+            LocalDate finishD=LocalDate.parse(finish,formatter);
+
+            request.setDate(1, Date.valueOf(startD));
+            request.setDate(2, Date.valueOf(finishD));
+            ResultSet res = request.executeQuery();
+            while (res.next()) {
+                User videogr = new User();
+
+                videogr.setFIO(res.getString(1));
+                videogr.setBirthDate(res.getString(2));
+
+                freeVideographers.add(videogr);
+            }
+            return freeVideographers;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public static User getVideographerByFIO(String FIO){
+        User user = new User();
+        String sql="SELECT * FROM Users WHERE roleId=3 AND FIO=?";
+        PreparedStatement request = null;
+        try {
+            request = connection.prepareStatement(sql);
+            request.setString(1, FIO);
+            ResultSet result = request.executeQuery();
+            if (result.next()) {
+                user.setUserId(result.getInt(1));
+                user.setUserLogin(result.getNString(2));
+                user.setFIO(result.getNString(4));
+                user.setPhoneNumber(result.getString(5));
+                user.setBirthDate(result.getDate(6).toString());
+                user.setEmail(result.getString(7));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return user;
+
     }
 }

@@ -148,11 +148,77 @@ public class MainPersonalAssistantConferenceWithVideoController {
         fioColumn.setCellValueFactory(new PropertyValueFactory<>("videographerFIO"));
         contactPhoneColumn.setCellValueFactory(new PropertyValueFactory<>("videographerPhoneNumber"));
         isVideoRequiredColumn.setCellValueFactory(new PropertyValueFactory<>("videoIsRequired"));
-         isPhotoRequiredColumn.setCellValueFactory(new PropertyValueFactory<>("photoIsRequired"));
-         deleteColumn.setCellValueFactory(new PropertyValueFactory<>("delete"));
-
+        isPhotoRequiredColumn.setCellValueFactory(new PropertyValueFactory<>("photoIsRequired"));
+        deleteColumn.setCellValueFactory(new PropertyValueFactory<>("delete"));
 
          videographer.setItems(shoots);
+
+        ////установить обработчики, при нажатии на чек бокс переходим на страницу добавления с указанием того, что нужно добавить
+        EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
+
+            public void handle(ActionEvent e)
+            {
+                if (videoIsRequired.isSelected()){
+                    FXMLLoader fxmlLoader = new FXMLLoader(ConferenceOrganizationCompanyApplication.class.getResource("personal-assistant-conference-view-with-video-or-photo-add.fxml"));
+                    Scene newScene = null;
+                    try {
+                        newScene = new Scene(fxmlLoader.load(), 700, 700);
+                    } catch (IOException r) {
+                        throw new RuntimeException(r);
+                    }
+                    AddVideoAndPhotoWithTablesController controller = fxmlLoader.getController();
+                    controller.setConnection(connection);
+                    controller.setConferenceRepository(conferenceRepository);
+                    controller.setCompanyRepository(new CompanyRepository(connection));
+                    controller.setPersonalAssistantId(personalAssistantId);
+                    controller.setStage(stage);
+                    controller.setPhotoRequired(false);
+                    controller.setVideoRequired(true);
+
+                    controller.setConferenceId(conferenceId);
+
+                    controller.setInfo();
+                    stage.setScene(newScene);
+
+                }
+            }
+
+        };
+
+        videoIsRequired.setOnAction(event);
+
+        EventHandler<ActionEvent> eventPhoto = new EventHandler<ActionEvent>() {
+
+            public void handle(ActionEvent e)
+            {
+                if (photoIsRequired.isSelected()){
+                    FXMLLoader fxmlLoader = new FXMLLoader(ConferenceOrganizationCompanyApplication.class.getResource("personal-assistant-conference-view-with-video-or-photo-add.fxml"));
+                    Scene newScene = null;
+                    try {
+                        newScene = new Scene(fxmlLoader.load(), 700, 700);
+                    } catch (IOException r) {
+                        throw new RuntimeException(r);
+                    }
+                    AddVideoAndPhotoWithTablesController controller = fxmlLoader.getController();
+                    controller.setConnection(connection);
+                    controller.setConferenceRepository(conferenceRepository);
+                    controller.setCompanyRepository(new CompanyRepository(connection));
+                    controller.setPersonalAssistantId(personalAssistantId);
+                    controller.setStage(stage);
+                    controller.setPhotoRequired(true);
+                    controller.setVideoRequired(false);
+
+                    controller.setConferenceId(conferenceId);
+
+                    controller.setInfo();
+                    stage.setScene(newScene);
+
+                }
+            }
+
+        };
+
+        photoIsRequired.setOnAction(eventPhoto);
     }
 
     public void backToMain() {

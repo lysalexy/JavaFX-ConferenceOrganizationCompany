@@ -77,4 +77,19 @@ public class VideoAndPhotoShootingRepository {
             throw new RuntimeException(e);
         }
     }
+
+    public static void addVideoAndPhotoShootingByShooting(int conferenceId, boolean isPhotoRequired, boolean isVideoRequired, int videographerId){
+        String sql="EXEC ADD_VIDEO_AND_PHOTO_SHOOTING ?,?,?,?";
+        PreparedStatement request = null;
+        try {
+            request = connection.prepareStatement(sql);
+            request.setInt(1, videographerId);
+            request.setBoolean(2, isPhotoRequired);
+            request.setBoolean(3, isVideoRequired);
+            request.setInt(4, conferenceId);
+            request.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
