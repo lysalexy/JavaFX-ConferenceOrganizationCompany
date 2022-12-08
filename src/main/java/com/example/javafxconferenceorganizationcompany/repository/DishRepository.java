@@ -1,6 +1,5 @@
 package com.example.javafxconferenceorganizationcompany.repository;
 
-import com.example.javafxconferenceorganizationcompany.models.BuffetPosition;
 import com.example.javafxconferenceorganizationcompany.models.Dish;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -38,5 +37,23 @@ public class DishRepository {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static int getDishByDishName(String dishName){
+        int out=0;
+        String sql = "EXEC GET_DISH_ID_BY_ITS_NAME ?";
+        PreparedStatement request=null;
+        try{
+            request=connection.prepareStatement(sql);
+            request.setString(1,dishName);
+            ///request.setInt(2,out);
+            ResultSet res =request.executeQuery();
+            if(res.next()){
+                out=res.getInt(1);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return out;
     }
 }
