@@ -2,7 +2,9 @@ package com.example.javafxconferenceorganizationcompany.controllers.MainAdmin;
 
 import com.example.javafxconferenceorganizationcompany.ConferenceOrganizationCompanyApplication;
 import com.example.javafxconferenceorganizationcompany.controllers.Conference.AddConferenceController;
+import com.example.javafxconferenceorganizationcompany.controllers.LocationController;
 import com.example.javafxconferenceorganizationcompany.controllers.Staff.AddStaffController;
+import com.example.javafxconferenceorganizationcompany.controllers.Staff.StaffController;
 import com.example.javafxconferenceorganizationcompany.models.User;
 import com.example.javafxconferenceorganizationcompany.repository.UserRepository;
 import javafx.fxml.FXML;
@@ -93,6 +95,45 @@ public class ChangeLoginController implements Initializable {
 
     }
 
+    public void toStaff(){
+        FXMLLoader fxmlLoader = new FXMLLoader(ConferenceOrganizationCompanyApplication.class.getResource("staff.fxml"));
+        Scene newScene = null;
+        try {
+            newScene = new Scene(fxmlLoader.load(), 700, 700);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        StaffController controller = fxmlLoader.getController();
+        controller.setConnection(connection);
+        controller.setUserRepository(userRepository);
+        controller.setStage(stage);
+        System.out.println(roleId);
+        controller.setRoleId(roleId);
+        controller.setId(id);
+        controller.setInfo();
+        stage.setScene(newScene);
+    }
+
+    public void goToBase(){
+        FXMLLoader fxmlLoader = new FXMLLoader(ConferenceOrganizationCompanyApplication.class.getResource("base-locations.fxml"));
+        Scene newScene = null;
+        try {
+            newScene = new Scene(fxmlLoader.load(), 700, 700);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        LocationController controller = fxmlLoader.getController();
+        controller.setConnection(connection);
+        controller.setUserRepository(userRepository);
+        controller.setStage(stage);
+        System.out.println(roleId);
+        controller.setRoleId(roleId);
+        controller.setId(id);
+        controller.setInfo();
+        stage.setScene(newScene);
+
+    }
+
     public void addConference(){
         FXMLLoader fxmlLoader = new FXMLLoader(ConferenceOrganizationCompanyApplication.class.getResource("add-conference.fxml"));
         Scene newScene = null;
@@ -108,6 +149,7 @@ public class ChangeLoginController implements Initializable {
         System.out.println(roleId);
         controller.setRoleId(roleId);
         controller.setId(id);
+        controller.setInfo();
         stage.setScene(newScene);
     }
 

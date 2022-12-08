@@ -111,7 +111,7 @@ public class StaffController {
             pers.setDelete(button);
 
         }
-        ////задаем таблицу фуршета
+        ////задаем таблицу
 
         loginColumn.setCellValueFactory(new PropertyValueFactory<>("userLogin"));
         FIOColumn.setCellValueFactory(new PropertyValueFactory<>("FIO"));

@@ -8,7 +8,8 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="700.0" style="-fx-background-color: #FFDAB9;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javafxconferenceorganizationcompany.controllers.MainPersonalAssistantAndVideographer.PersonalAssistantAndVideographerMainController">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="700.0" style="-fx-background-color: #FFDAB9;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.javafxconferenceorganizationcompany.controllers.LocationController">
    <children>
       <AnchorPane prefHeight="89.0" prefWidth="700.0" style="-fx-background-color: #FF7F50;">
          <children>
@@ -19,18 +20,18 @@
             </Label>
          </children>
       </AnchorPane>
-      <Button id="addToBack" layoutX="435.0" layoutY="645.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="239.0" style="-fx-background-color: #FF7F50;" text="Вернуться на главную страницу" textFill="#f4f2f2">
+      <Button id="backToMain" onAction="#backToMain" layoutX="435.0" layoutY="645.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="239.0" style="-fx-background-color: #FF7F50;" text="Вернуться на главную страницу" textFill="#f4f2f2">
          <font>
             <Font name="Georgia" size="14.0" />
          </font>
       </Button>
-      <TableView layoutX="19.0" layoutY="172.0" prefHeight="221.0" prefWidth="665.0">
+      <TableView fx:id="locationTable" layoutX="19.0" layoutY="172.0" prefHeight="221.0" prefWidth="665.0">
         <columns>
-          <TableColumn prefWidth="172.0000057220459" text="Наименование помещения" />
-          <TableColumn prefWidth="170.39996337890625" text="Физический адрес" />
-            <TableColumn prefWidth="115.99993896484375" text="Вместимость(число человек)" />
-            <TableColumn prefWidth="103.19998168945312" text="Стоимость часа аренды(в рублях)" />
-            <TableColumn prefWidth="103.19998168945312" text="Удалить" />
+          <TableColumn fx:id="locationNameColumn" prefWidth="172.0000057220459" text="Наименование помещения" />
+          <TableColumn fx:id="locationAddressColumn" prefWidth="170.39996337890625" text="Физический адрес" />
+            <TableColumn fx:id="locationCapacityColumn" prefWidth="115.99993896484375" text="Вместимость(число человек)" />
+            <TableColumn fx:id="costColumn" prefWidth="103.19998168945312" text="Стоимость часа аренды(в рублях)" />
+            <TableColumn fx:id="deleteColumn" prefWidth="103.19998168945312" text="Удалить" />
         </columns>
       </TableView>
       <Button id="add" layoutX="515.0" layoutY="587.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="161.0" style="-fx-background-color: #FF7F50;" text="Добавить" textFill="#fcfbfb">
@@ -48,18 +49,18 @@
             <Font name="Georgia" size="16.0" />
          </font>
       </Label>
-      <TextField id="locationName" layoutX="245.0" layoutY="416.0" prefHeight="26.0" prefWidth="267.0" />
-      <Button id="buffetPositions" layoutX="177.0" layoutY="109.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="267.0" style="-fx-background-color: #FF7F50;" text="Блюда фуршетного меню" textFill="#f4f2f2">
+      <TextField fx:id="locationName" layoutX="245.0" layoutY="416.0" prefHeight="26.0" prefWidth="267.0" />
+      <Button fx:id="buffetPositions" layoutX="177.0" layoutY="109.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="267.0" style="-fx-background-color: #FF7F50;" text="Блюда фуршетного меню" textFill="#f4f2f2">
          <font>
             <Font name="Georgia" size="19.0" />
          </font>
       </Button>
-      <Button id="buffetPositions" layoutX="457.0" layoutY="109.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="225.0" style="-fx-background-color: #FF7F50;" text="Компании-заказчики" textFill="#f4f2f2">
+      <Button fx:id="customerCompanies" layoutX="457.0" layoutY="109.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="225.0" style="-fx-background-color: #FF7F50;" text="Компании-заказчики" textFill="#f4f2f2">
          <font>
             <Font name="Georgia" size="19.0" />
          </font>
       </Button>
-      <Label id="invalidLocationName" layoutX="245.0" layoutY="442.0" prefHeight="17.0" prefWidth="267.0" textFill="#ec0606">
+      <Label fx:id="invalidLocationName" layoutX="245.0" layoutY="442.0" prefHeight="17.0" prefWidth="267.0" textFill="#ec0606">
          <font>
             <Font name="Georgia Italic" size="12.0" />
          </font>
@@ -69,8 +70,8 @@
             <Font name="Georgia" size="16.0" />
          </font>
       </Label>
-      <TextField id="locationAddress" layoutX="244.0" layoutY="463.0" prefHeight="26.0" prefWidth="267.0" />
-      <Label id="invalidAddress" layoutX="244.0" layoutY="491.0" prefHeight="17.0" prefWidth="267.0" textFill="#ec0606">
+      <TextField fx:id="locationAddress" layoutX="244.0" layoutY="463.0" prefHeight="26.0" prefWidth="267.0" />
+      <Label fx:id="invalidAddress" layoutX="244.0" layoutY="491.0" prefHeight="17.0" prefWidth="267.0" textFill="#ec0606">
          <font>
             <Font name="Georgia Italic" size="12.0" />
          </font>
@@ -80,8 +81,8 @@
             <Font name="Georgia" size="16.0" />
          </font>
       </Label>
-      <TextField id="locationCapacity" layoutX="244.0" layoutY="507.0" prefHeight="26.0" prefWidth="267.0" />
-      <Label id="invalidCapacity" layoutX="244.0" layoutY="535.0" prefHeight="17.0" prefWidth="267.0" textFill="#ec0606">
+      <TextField fx:id="locationCapacity" layoutX="244.0" layoutY="507.0" prefHeight="26.0" prefWidth="267.0" />
+      <Label fx:id="invalidCapacity" layoutX="244.0" layoutY="535.0" prefHeight="17.0" prefWidth="267.0" textFill="#ec0606">
          <font>
             <Font name="Georgia Italic" size="12.0" />
          </font>
@@ -91,8 +92,8 @@
             <Font name="Georgia" size="16.0" />
          </font>
       </Label>
-      <TextField id="locationCost" layoutX="243.0" layoutY="552.0" prefHeight="26.0" prefWidth="267.0" />
-      <Label id="invalidCost" layoutX="243.0" layoutY="580.0" prefHeight="17.0" prefWidth="267.0" textFill="#ec0606">
+      <TextField fx:id="locationCost" layoutX="243.0" layoutY="552.0" prefHeight="26.0" prefWidth="267.0" />
+      <Label fx:id="invalidCost" layoutX="243.0" layoutY="580.0" prefHeight="17.0" prefWidth="267.0" textFill="#ec0606">
          <font>
             <Font name="Georgia Italic" size="12.0" />
          </font>

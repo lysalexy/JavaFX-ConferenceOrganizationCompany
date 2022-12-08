@@ -107,7 +107,7 @@
             <Font name="Georgia" size="14.0" />
          </font>
       </Button>
-      <Button id="getResourcesInfo" fx:id="getResourcesInfo" layoutX="363.0" layoutY="549.0" mnemonicParsing="false"  prefHeight="51.0" prefWidth="306.0" style="-fx-background-color: #FF7F50;" text="База заказчиков и ресурсов" textFill="#f7f1f1" underline="true">
+      <Button id="getResourcesInfo" fx:id="getResourcesInfo" onAction="#goToBase" layoutX="363.0" layoutY="549.0" mnemonicParsing="false"  prefHeight="51.0" prefWidth="306.0" style="-fx-background-color: #FF7F50;" text="База заказчиков и ресурсов" textFill="#f7f1f1" underline="true">
          <font>
             <Font name="Georgia" size="14.0" />
          </font>

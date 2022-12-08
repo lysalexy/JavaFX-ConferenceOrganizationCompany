@@ -24,6 +24,9 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class AddConferenceController {
+
+    @FXML
+    private  TextField description;
     @FXML
     private TextField start;
     @FXML
@@ -33,11 +36,11 @@ public class AddConferenceController {
     @FXML
     private TextField amount;
     @FXML
-    private ComboBox<String> customerCompany;
+    private ComboBox customerCompany;
     @FXML
-    private ComboBox<String> personalAssistantFIO;
+    private ComboBox personalAssistantFIO;
     @FXML
-    private ComboBox<String> personalAssistantBirthDay;
+    private ComboBox personalAssistantBirthDay;
     @FXML
     private Button getBirthDay;
     @FXML
@@ -57,7 +60,7 @@ public class AddConferenceController {
     @FXML
     private Button getFree;
     @FXML
-    private ComboBox<String> location;
+    private ComboBox loc;
     private Connection connection;
     private UserRepository userRepository;
     private Stage stage;
@@ -146,7 +149,7 @@ public class AddConferenceController {
                 for (Location loc : locations) {
                     locationNames.add(loc.getLocationName());
                 }
-                location.setItems(locationNames);
+                loc.setItems(locationNames);
 
                 ObservableList<Company> companies= new CompanyRepository(connection).getAllCompanies();
 
@@ -156,7 +159,7 @@ public class AddConferenceController {
                 }
                 customerCompany.setItems(companyNames);
 
-                ObservableList<User> assistants= userRepository.getFreePersonalAssistants(startV, finishV)
+                ObservableList<User> assistants= userRepository.getFreePersonalAssistants(startV, finishV);
 
                 ObservableList<String> assistantsFIO = FXCollections.observableArrayList();
                 for (User ass: assistants) {
@@ -172,10 +175,43 @@ public class AddConferenceController {
     }
 
     public void enterFIO(){
-        ObservableList<String> birthDayByFIO = userRepository.getUserBirthDayByFIO(personalAssistantFIO.getValue());
+        ObservableList<String> birthDayByFIO = userRepository.getUserBirthDayByFIO((String) personalAssistantFIO.getValue());
 
         personalAssistantBirthDay.setItems(birthDayByFIO);
         ////заполняем дату
+    }
+
+    public void setInfo(){
+        ObservableList<Location> locations= new LocationRepository(connection).getAllLocations();
+
+        ObservableList<String> locationNames = FXCollections.observableArrayList();
+        for (Location loc : locations) {
+            locationNames.add(loc.getLocationName());
+        }
+        loc.setItems(locationNames);
+
+        ObservableList<Company> companies= new CompanyRepository(connection).getAllCompanies();
+
+        ObservableList<String> companyNames = FXCollections.observableArrayList();
+        for (Company comp: companies) {
+            companyNames.add(comp.getCompanyName());
+        }
+        customerCompany.setItems(companyNames);
+
+        ObservableList<User> assistants= userRepository.getAllActivePersonalAssistants();
+
+        ObservableList<String> assistantsFIO = FXCollections.observableArrayList();
+        for (User ass: assistants) {
+            assistantsFIO.add(ass.getFIO());
+        }
+        personalAssistantFIO.setItems(assistantsFIO);
+
+        ObservableList<String> birthDay= FXCollections.observableArrayList();
+
+        birthDay.add("empty");
+
+        personalAssistantBirthDay.setItems(birthDay);
+
     }
 
     public void add(){
@@ -218,16 +254,21 @@ public class AddConferenceController {
                     throw new NumberFormatException();
                 }
                 if (startIsValid && finishIsValid) {
-                    Location loc= new LocationRepository(connection).getLocationByName(location.getValue());
-                    int locationId=loc.getLocationId();
+                    Location locat= new LocationRepository(connection).getLocationByName((String) loc.getValue());
+                    int locationId=locat.getLocationId();
 
-                    Company comp = new CompanyRepository(connection).getCompanyByName(customerCompany.getValue());
+                    Company comp = new CompanyRepository(connection).getCompanyByName((String) customerCompany.getValue());
                     int companyId=comp.getCompanyId();
 
-                    User personalAssistant = userRepository.getUserByHisFIOAndBirthDay(personalAssistantFIO.getValue(), personalAssistantBirthDay.getValue());
+                    User personalAssistant = userRepository.getUserByHisFIOAndBirthDay((String) personalAssistantFIO.getValue(), (String) personalAssistantBirthDay.getValue());
                     int persId=personalAssistant.getUserId();
 
-                    new ConferenceRepository(connection).
+                    String descriptionV=description.getText();
+
+                    new ConferenceRepository(connection).addConference(startV,finishV,am,budgetV,descriptionV,locationId,companyId,persId);
+                    conferenceSuccessfullyAdded.setText("Конференция успешно создана");
+
+                    ////добавление конференции, вывод в лейбл
                 }
             }
             catch (NumberFormatException e){

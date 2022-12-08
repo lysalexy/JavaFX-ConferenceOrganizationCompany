@@ -6,6 +6,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import kotlin.text.Regex;
 
+import javax.swing.text.DateFormatter;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -337,11 +338,11 @@ public class UserRepository {
         try {
             request = connection.prepareStatement(sql);
 
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
-            LocalDateTime birthDayD=LocalDateTime.parse(birthDay,formatter);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDate birthDayD=LocalDate.parse(birthDay,formatter);
 
             request.setString(1, FIO);
-            request.setTimestamp(2, Timestamp.valueOf(birthDayD));
+            request.setDate(2, Date.valueOf(birthDayD));
 
             ResultSet result = request.executeQuery();
             if (result.next()) {

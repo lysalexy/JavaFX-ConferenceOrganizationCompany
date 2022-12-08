@@ -4,10 +4,9 @@ import com.example.javafxconferenceorganizationcompany.models.Conference;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class ConferenceRepository {
     private static Connection connection;
@@ -79,5 +78,32 @@ public class ConferenceRepository {
             throw new RuntimeException(e);
         }
         return new Conference();
+    }
+
+    public void addConference(String start, String finish, int participantsAmount,
+                              double budget, String description, int locationId, int companyId, int personalAssistantId){
+        String sql = "EXEC ADD_CONFERENCE ?,?,?,?,?,?,?,?";
+        try {
+            PreparedStatement request = connection.prepareStatement(sql);
+
+            request = connection.prepareStatement(sql);
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
+            LocalDateTime startD=LocalDateTime.parse(start,formatter);
+            LocalDateTime finishD=LocalDateTime.parse(finish,formatter);
+
+            request.setTimestamp(1, Timestamp.valueOf(startD));
+            request.setTimestamp(2, Timestamp.valueOf(finishD));
+            request.setInt(3, participantsAmount);
+            request.setDouble(4, budget);
+            request.setString(5, description);
+            request.setInt(6,locationId);
+            request.setInt(7,companyId);
+            request.setInt(8,personalAssistantId);
+
+            request.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

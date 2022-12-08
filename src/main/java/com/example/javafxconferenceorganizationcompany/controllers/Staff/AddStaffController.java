@@ -175,8 +175,6 @@ public class AddStaffController {
             stage.setScene(newScene);
         }
 
-
-
         ////считываем поля
         ///прогоняем их через валидацию
         ///если все поля валидны, то выполняем добавление
