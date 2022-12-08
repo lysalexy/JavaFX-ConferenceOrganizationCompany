@@ -1,50 +1,77 @@
 package com.example.javafxconferenceorganizationcompany.controllers.MainAdmin;
 
 import com.example.javafxconferenceorganizationcompany.ConferenceOrganizationCompanyApplication;
-import com.example.javafxconferenceorganizationcompany.controllers.CompaniesController;
 import com.example.javafxconferenceorganizationcompany.controllers.Conference.AddConferenceController;
-import com.example.javafxconferenceorganizationcompany.controllers.Conference.AddVideoAndPhotoWithTablesController;
-import com.example.javafxconferenceorganizationcompany.controllers.Conference.MainPersonalAssistantConferenceWithVideoController;
 import com.example.javafxconferenceorganizationcompany.controllers.LocationController;
 import com.example.javafxconferenceorganizationcompany.controllers.Staff.AddStaffController;
 import com.example.javafxconferenceorganizationcompany.controllers.Staff.StaffController;
-import com.example.javafxconferenceorganizationcompany.models.Conference;
+import com.example.javafxconferenceorganizationcompany.models.Location;
 import com.example.javafxconferenceorganizationcompany.models.User;
-import com.example.javafxconferenceorganizationcompany.repository.CompanyRepository;
+import com.example.javafxconferenceorganizationcompany.repository.LocationRepository;
 import com.example.javafxconferenceorganizationcompany.repository.UserRepository;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.net.URL;
 import java.sql.Connection;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.ResourceBundle;
 
-public class AdministratorMainController implements Initializable {
-    @FXML
-    private TextField finish;
+public class GetFreeVideographers {
     @FXML
     private RadioButton locations;
     @FXML
+    private TableView freeVideographersTable;
+
+    @FXML
+    private TableColumn FIOColumn;
+    @FXML
+    private TableColumn birthDayColumn;
+    @FXML
+    private Label FIO;
+
+    @FXML
+    private Label birthDay;
+    @FXML
+    private Label email;
+    @FXML
+    private Label login;
+    @FXML
+    private Label phoneNumber;
+    @FXML
+    private Button getStaffInfo;
+    @FXML
+    private Button getResourcesInfo;
+    @FXML
+    private Button newConference;
+    @FXML
+    private Button hireEmployee;
+    @FXML
+    private Label invalidDate;
+    @FXML
+    private TableView freeLocationsTable;
+    @FXML
+    private TableColumn locationNameColumn;
+    @FXML
+    private TableColumn locationAddressColumn;
+    @FXML
+    private TableColumn costColumn;
+    @FXML
     private TextField start;
+    @FXML
+    private TextField finish;
     @FXML
     private RadioButton personalAssistants;
     @FXML
     private RadioButton videographers;
-    @FXML
-    private Label invalidDate;
     private Connection connection;
     private UserRepository userRepository;
     private Stage stage;
@@ -52,27 +79,12 @@ public class AdministratorMainController implements Initializable {
 
     private Integer roleId;
 
-    @FXML
-    private Label email;
-
-    @FXML
-    private Label birthDay;
-
-    @FXML
-    private Label login;
-
-    @FXML
-    private Label phoneNumber;
-
-    @FXML
-    private Label FIO;
-
     public void setConnection(Connection connection) {
         this.connection = connection;
     }
 
     public void setUserRepository(UserRepository userRep) {
-        userRepository = userRep;
+        userRepository=userRep;
     }
 
 
@@ -84,12 +96,17 @@ public class AdministratorMainController implements Initializable {
         id = i;
     }
 
-    public void setRoleId(Integer role) {
-        roleId = role;
+    public void setRoleId(Integer role){
+        roleId=role;
     }
 
-    public void setInfo() {
-        User user = UserRepository.getUserPersonalInfo(id);
+    public void setStartAndFinish(String st, String fin){
+        start.setText(st);
+        finish.setText(fin);
+    }
+
+    public void setInfo(){
+        User user=UserRepository.getUserPersonalInfo(id);
 
         login.setText(user.getUserLogin());
         FIO.setText(user.getFIO());
@@ -97,41 +114,12 @@ public class AdministratorMainController implements Initializable {
         birthDay.setText(user.getBirthDate());
         email.setText(user.getEmail());
 
-        EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
+        ObservableList<User> videographers= userRepository.getFreeVideographers(start.getText(), finish.getText());
 
-            public void handle(ActionEvent e) {
-                ///парсим время и если всё ок то идем на другую страничку
-                try {
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
-                    LocalDateTime startD = LocalDateTime.parse(start.getText(), formatter);
-                    LocalDateTime finishD = LocalDateTime.parse(finish.getText(), formatter);
+        FIOColumn.setCellValueFactory(new PropertyValueFactory<>("FIO"));
+        birthDayColumn.setCellValueFactory(new PropertyValueFactory<>("birthDate"));
 
-
-                    FXMLLoader fxmlLoader = new FXMLLoader(ConferenceOrganizationCompanyApplication.class.getResource("administrator-main-get-locations.fxml"));
-                    Scene newScene = null;
-                    try {
-                        newScene = new Scene(fxmlLoader.load(), 700, 700);
-                    } catch (IOException r) {
-                        throw new RuntimeException(r);
-                    }
-                    GetFreeLocations controller = fxmlLoader.getController();
-                    controller.setConnection(connection);
-                    controller.setConnection(connection);
-                    controller.setUserRepository(userRepository);
-                    controller.setStage(stage);
-                    System.out.println(roleId);
-                    controller.setRoleId(roleId);
-                    controller.setId(id);
-                    controller.setInfo();
-                    controller.setStartAndFinish(start.getText(), finish.getText());
-                    stage.setScene(newScene);
-                } catch (DateTimeParseException n) {
-                    invalidDate.setText("Формат даты и времени yyyy-MM-dd HH:mm:ss.S");
-                }
-            }
-        };
-
-        locations.setOnAction(event);
+        freeVideographersTable.setItems(videographers);
 
         EventHandler<ActionEvent> eventAss = e -> {
             ///парсим время и если всё ок то идем на другую страничку
@@ -169,45 +157,46 @@ public class AdministratorMainController implements Initializable {
 
         personalAssistants.setOnAction(eventAss);
 
-        EventHandler<ActionEvent> eventAVid = e -> {
-            ///парсим время и если всё ок то идем на другую страничку
-            try {
-                System.out.println(start.getText());
-                System.out.println(finish.getText());
+        EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
 
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
-                LocalDateTime startD = LocalDateTime.parse(start.getText(), formatter);
-                LocalDateTime finishD = LocalDateTime.parse(finish.getText(), formatter);
-
-
-                FXMLLoader fxmlLoader = new FXMLLoader(ConferenceOrganizationCompanyApplication.class.getResource("administrator-main-get-videographers.fxml"));
-                Scene newScene = null;
+            public void handle(ActionEvent e) {
+                ///парсим время и если всё ок то идем на другую страничку
                 try {
-                    newScene = new Scene(fxmlLoader.load(), 700, 700);
-                } catch (IOException r) {
-                    throw new RuntimeException(r);
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
+                    LocalDateTime startD = LocalDateTime.parse(start.getText(), formatter);
+                    LocalDateTime finishD = LocalDateTime.parse(finish.getText(), formatter);
+
+
+                    FXMLLoader fxmlLoader = new FXMLLoader(ConferenceOrganizationCompanyApplication.class.getResource("administrator-main-get-locations.fxml"));
+                    Scene newScene = null;
+                    try {
+                        newScene = new Scene(fxmlLoader.load(), 700, 700);
+                    } catch (IOException r) {
+                        throw new RuntimeException(r);
+                    }
+                    GetFreeLocations controller = fxmlLoader.getController();
+                    controller.setConnection(connection);
+                    controller.setConnection(connection);
+                    controller.setUserRepository(userRepository);
+                    controller.setStage(stage);
+                    System.out.println(roleId);
+                    controller.setRoleId(roleId);
+                    controller.setId(id);
+                    controller.setInfo();
+                    controller.setStartAndFinish(start.getText(), finish.getText());
+                    stage.setScene(newScene);
+                } catch (DateTimeParseException n) {
+                    invalidDate.setText("Формат даты и времени yyyy-MM-dd HH:mm:ss.S");
                 }
-                GetFreeVideographers controller = fxmlLoader.getController();
-                controller.setConnection(connection);
-                controller.setConnection(connection);
-                controller.setUserRepository(userRepository);
-                controller.setStage(stage);
-                System.out.println(roleId);
-                controller.setRoleId(roleId);
-                controller.setId(id);
-                controller.setStartAndFinish(start.getText(), finish.getText());
-                controller.setInfo();
-                stage.setScene(newScene);
-            } catch (DateTimeParseException n) {
-                invalidDate.setText("Формат даты и времени yyyy-MM-dd HH:mm:ss.S");
             }
         };
 
-       videographers.setOnAction(eventAVid);
+        locations.setOnAction(event);
+
 
     }
 
-    public void onClickChangePassword() {
+    public void onClickChangePassword(){
         FXMLLoader fxmlLoader = new FXMLLoader(ConferenceOrganizationCompanyApplication.class.getResource("administrator-main-change-password.fxml"));
         Scene newScene = null;
         try {
@@ -226,7 +215,7 @@ public class AdministratorMainController implements Initializable {
 
     }
 
-    public void onClickChangeLogin() {
+    public void onClickChangeLogin(){
         FXMLLoader fxmlLoader = new FXMLLoader(ConferenceOrganizationCompanyApplication.class.getResource("administrator-main-change-login.fxml"));
         Scene newScene = null;
         try {
@@ -245,7 +234,7 @@ public class AdministratorMainController implements Initializable {
 
     }
 
-    public void onClickChangeEmail() {
+    public void onClickChangeEmail(){
         FXMLLoader fxmlLoader = new FXMLLoader(ConferenceOrganizationCompanyApplication.class.getResource("administrator-main-change-email.fxml"));
         Scene newScene = null;
         try {
@@ -263,8 +252,7 @@ public class AdministratorMainController implements Initializable {
         stage.setScene(newScene);
 
     }
-
-    public void onClickChangePhoneNumber() {
+    public void onClickChangePhoneNumber(){
         FXMLLoader fxmlLoader = new FXMLLoader(ConferenceOrganizationCompanyApplication.class.getResource("administrator-main-change-phone.fxml"));
         Scene newScene = null;
         try {
@@ -282,7 +270,7 @@ public class AdministratorMainController implements Initializable {
         stage.setScene(newScene);
     }
 
-    public void toStaff() {
+    public void toStaff(){
         FXMLLoader fxmlLoader = new FXMLLoader(ConferenceOrganizationCompanyApplication.class.getResource("staff.fxml"));
         Scene newScene = null;
         try {
@@ -301,7 +289,7 @@ public class AdministratorMainController implements Initializable {
         stage.setScene(newScene);
     }
 
-    public void addStaff() {
+    public void addStaff(){
         FXMLLoader fxmlLoader = new FXMLLoader(ConferenceOrganizationCompanyApplication.class.getResource("add-employee.fxml"));
         Scene newScene = null;
         try {
@@ -320,7 +308,7 @@ public class AdministratorMainController implements Initializable {
         stage.setScene(newScene);
     }
 
-    public void goToBase() {
+    public void goToBase(){
         FXMLLoader fxmlLoader = new FXMLLoader(ConferenceOrganizationCompanyApplication.class.getResource("base-locations.fxml"));
         Scene newScene = null;
         try {
@@ -340,7 +328,7 @@ public class AdministratorMainController implements Initializable {
 
     }
 
-    public void addConference() {
+    public void addConference(){
         FXMLLoader fxmlLoader = new FXMLLoader(ConferenceOrganizationCompanyApplication.class.getResource("add-conference.fxml"));
         Scene newScene = null;
         try {
@@ -358,10 +346,5 @@ public class AdministratorMainController implements Initializable {
         controller.setInfo();
         stage.setScene(newScene);
     }
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-    }
 }
-
 

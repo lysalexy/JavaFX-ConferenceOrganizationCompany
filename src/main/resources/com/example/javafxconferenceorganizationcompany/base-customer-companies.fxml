@@ -25,11 +25,11 @@
             <Font name="Georgia" size="14.0" />
          </font>
       </Button>
-      <TableView layoutX="19.0" layoutY="172.0" prefHeight="221.0" prefWidth="665.0">
+      <TableView fx:id="companiesTable" layoutX="19.0" layoutY="172.0" prefHeight="221.0" prefWidth="665.0">
         <columns>
-          <TableColumn prefWidth="220.80001258850098" text="Наименование компании" />
-          <TableColumn prefWidth="277.6000061035156" text="ФИО контактного лица" />
-            <TableColumn prefWidth="167.20001220703125" text="Контактный номер" />
+          <TableColumn fx:id="companyNameColumn" prefWidth="220.80001258850098" text="Наименование компании" />
+          <TableColumn fx:id="FIOColumn" prefWidth="277.6000061035156" text="ФИО контактного лица" />
+            <TableColumn fx:id="phoneColumn" prefWidth="167.20001220703125" text="Контактный номер" />
         </columns>
       </TableView>
       <Button id="add" layoutX="515.0" layoutY="587.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="161.0" style="-fx-background-color: #FF7F50;" text="Добавить" textFill="#fcfbfb">

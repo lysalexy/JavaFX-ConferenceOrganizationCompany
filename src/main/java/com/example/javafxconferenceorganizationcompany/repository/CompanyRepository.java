@@ -40,6 +40,19 @@ public class CompanyRepository {
         return new Company();
     }
 
+    public void addCompany(String companyName, String FIO, String number){
+        String sql = "EXEC ADD_COMPANY ?,?,?";
+        try {
+            PreparedStatement request = connection.prepareStatement(sql);
+            request.setString(1,companyName);
+            request.setString(2,FIO);
+            request.setString(3,number);
+            request.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public static ObservableList<Company> getAllCompanies(){
         ObservableList<Company> companies = FXCollections.observableArrayList();
 

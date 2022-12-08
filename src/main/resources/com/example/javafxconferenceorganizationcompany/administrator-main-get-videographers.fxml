@@ -9,7 +9,8 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="700.0" style="-fx-background-color: #FFDAB9;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javafxconferenceorganizationcompany.controllers.MainPersonalAssistantAndVideographer.PersonalAssistantAndVideographerMainController">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="700.0" style="-fx-background-color: #FFDAB9;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.javafxconferenceorganizationcompany.controllers.MainAdmin.GetFreeVideographers">
    <children>
       <AnchorPane prefHeight="89.0" prefWidth="700.0" style="-fx-background-color: #FF7F50;">
          <children>
@@ -50,7 +51,7 @@
             <Font name="Georgia Italic" size="16.0" />
          </font>
       </Label>
-      <Label id="birthDay" fx:id="birthDay" layoutX="257.0" layoutY="126.0" prefHeight="29.0" prefWidth="384.0" />
+      <Label  fx:id="birthDay" layoutX="257.0" layoutY="126.0" prefHeight="29.0" prefWidth="384.0" />
       <Label id="FIO" fx:id="FIO" layoutX="257.0" layoutY="96.0" prefHeight="29.0" prefWidth="384.0" />
       <Button id="changeLogin" layoutX="587.0" layoutY="195.0" mnemonicParsing="false" onAction="#onClickChangeLogin" style="-fx-background-color: #FF7F50;" text="Изменить" textFill="#f7f1f1" underline="true">
          <font>
@@ -81,52 +82,52 @@
             <Font name="Georgia Italic" size="16.0" />
          </font>
       </Label>
-      <TextField id="start" layoutX="59.0" layoutY="343.0" prefHeight="22.0" prefWidth="174.0" />
+      <TextField fx:id="start" layoutX="59.0" layoutY="343.0" prefHeight="22.0" prefWidth="174.0" />
       <Label layoutX="242.0" layoutY="348.0" prefHeight="19.0" prefWidth="34.0" text="до" textFill="#434242">
          <font>
             <Font name="Georgia Italic" size="16.0" />
          </font>
       </Label>
-      <TextField id="finish" layoutX="274.0" layoutY="342.0" prefHeight="26.0" prefWidth="185.0" />
-      <RadioButton id="personalAssistants" layoutX="57.0" layoutY="473.0" mnemonicParsing="false" text="помещений">
+      <TextField fx:id="finish" layoutX="274.0" layoutY="342.0" prefHeight="26.0" prefWidth="185.0" />
+      <RadioButton fx:id="locations" layoutX="57.0" layoutY="473.0" mnemonicParsing="false" text="помещений">
          <font>
             <Font name="Georgia Italic" size="17.0" />
          </font>
       </RadioButton>
-      <RadioButton id="videographers" layoutX="57.0" layoutY="507.0" mnemonicParsing="false" text="личных помощников">
+      <RadioButton fx:id="personalAssistants" layoutX="57.0" layoutY="507.0" mnemonicParsing="false" text="личных помощников">
          <font>
             <Font name="Georgia Italic" size="17.0" />
          </font>
       </RadioButton>
-      <Button id="getStaffInfo" fx:id="changePhone1" layoutX="30.0" layoutY="548.0" mnemonicParsing="false" onAction="#onClickChangePhoneNumber" prefHeight="51.0" prefWidth="306.0" style="-fx-background-color: #FF7F50;" text="Получить всю информацию о сотрудниках" textFill="#f7f1f1" underline="true">
+      <Button id="getStaffInfo" fx:id="getStaffInfo" onAction="#toStaff" layoutX="30.0" layoutY="548.0" mnemonicParsing="false"  prefHeight="51.0" prefWidth="306.0" style="-fx-background-color: #FF7F50;" text="Получить всю информацию о сотрудниках" textFill="#f7f1f1" underline="true">
          <font>
             <Font name="Georgia" size="14.0" />
          </font>
       </Button>
-      <Button id="getResourcesInfo" fx:id="changePhone11" layoutX="363.0" layoutY="549.0" mnemonicParsing="false" onAction="#onClickChangePhoneNumber" prefHeight="51.0" prefWidth="306.0" style="-fx-background-color: #FF7F50;" text="База заказчиков и ресурсов" textFill="#f7f1f1" underline="true">
+      <Button id="getResourcesInfo" fx:id="getResourcesInfo" onAction="#goToBase" layoutX="363.0" layoutY="549.0" mnemonicParsing="false"  prefHeight="51.0" prefWidth="306.0" style="-fx-background-color: #FF7F50;" text="База заказчиков и ресурсов" textFill="#f7f1f1" underline="true">
          <font>
             <Font name="Georgia" size="14.0" />
          </font>
       </Button>
-      <Button id="newConference" fx:id="changePhone12" layoutX="362.0" layoutY="618.0" mnemonicParsing="false" onAction="#onClickChangePhoneNumber" prefHeight="51.0" prefWidth="306.0" style="-fx-background-color: #FF7F50;" text="Организация новой конференции" textFill="#f7f1f1" underline="true">
+      <Button id="newConference" fx:id="newConference"  onAction="#addConference" layoutX="362.0" layoutY="618.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="306.0" style="-fx-background-color: #FF7F50;" text="Организация новой конференции" textFill="#f7f1f1" underline="true">
          <font>
             <Font name="Georgia" size="14.0" />
          </font>
       </Button>
-      <Button id="hireEmployee" fx:id="changePhone13" layoutX="26.0" layoutY="618.0" mnemonicParsing="false" onAction="#onClickChangePhoneNumber" prefHeight="51.0" prefWidth="306.0" style="-fx-background-color: #FF7F50;" text="Нанять сотрудника" textFill="#f7f1f1" underline="true">
+      <Button fx:id="hireEmployee" onAction="#addStaff" layoutX="26.0" layoutY="618.0" mnemonicParsing="false"  prefHeight="51.0" prefWidth="306.0" style="-fx-background-color: #FF7F50;" text="Нанять сотрудника" textFill="#f7f1f1" underline="true">
          <font>
             <Font name="Georgia" size="14.0" />
          </font>
       </Button>
-      <Label id="invalidDate" layoutX="490.0" layoutY="342.0" prefHeight="26.0" prefWidth="166.0" textFill="#dc0e0e">
+      <Label fx:id="invalidDate" layoutX="490.0" layoutY="342.0" prefHeight="26.0" prefWidth="166.0" textFill="#dc0e0e">
          <font>
             <Font name="Georgia Italic" size="16.0" />
          </font>
       </Label>
-      <TableView id="freePersonalAssistants" layoutX="28.0" layoutY="379.0" prefHeight="90.0" prefWidth="644.0">
+      <TableView fx:id="freeVideographersTable" layoutX="28.0" layoutY="379.0" prefHeight="90.0" prefWidth="644.0">
         <columns>
-          <TableColumn id="freeVideographers" prefWidth="361.5999813079834" text="ФИО видеографа" />
-          <TableColumn prefWidth="281.6000061035156" text="Дата рождения" />
+          <TableColumn fx:id="FIOColumn" prefWidth="361.5999813079834" text="ФИО видеографа" />
+          <TableColumn fx:id="birthDayColumn" prefWidth="281.6000061035156" text="Дата рождения" />
         </columns>
       </TableView>
    </children>
