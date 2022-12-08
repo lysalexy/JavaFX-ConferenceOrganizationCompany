@@ -67,6 +67,7 @@ public class AuthenticationController implements Initializable {
                         FXMLLoader fxmlLoader = new FXMLLoader(ConferenceOrganizationCompanyApplication.class.getResource("administrator-main.fxml"));
                         Scene newScene = new Scene(fxmlLoader.load(), 700, 700);
                         AdministratorMainController controller = fxmlLoader.getController();
+                        controller.setConnection(connection);
                         controller.setUserRepository(userRepository);
                         controller.setStage(stage);
                         System.out.println(roleId);

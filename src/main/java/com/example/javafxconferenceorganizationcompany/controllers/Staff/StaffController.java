@@ -1,11 +1,8 @@
-package com.example.javafxconferenceorganizationcompany.controllers;
+package com.example.javafxconferenceorganizationcompany.controllers.Staff;
 
 import com.example.javafxconferenceorganizationcompany.ConferenceOrganizationCompanyApplication;
-import com.example.javafxconferenceorganizationcompany.controllers.Buffet.MainBuffetController;
 import com.example.javafxconferenceorganizationcompany.controllers.MainAdmin.AdministratorMainController;
-import com.example.javafxconferenceorganizationcompany.models.BuffetPosition;
 import com.example.javafxconferenceorganizationcompany.models.User;
-import com.example.javafxconferenceorganizationcompany.repository.CompanyRepository;
 import com.example.javafxconferenceorganizationcompany.repository.UserRepository;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -20,6 +17,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.Connection;
 
 public class StaffController {
     @FXML
@@ -54,6 +52,12 @@ public class StaffController {
     private Stage stage;
     private Integer id;
     private Integer roleId;
+
+    private Connection connection;
+
+    public void setConnection(Connection connection) {
+        this.connection = connection;
+    }
 
     public void setUserRepository(UserRepository userRep) {
         userRepository = userRep;
@@ -170,6 +174,26 @@ public class StaffController {
             throw new RuntimeException(e);
         }
         AdministratorMainController controller = fxmlLoader.getController();
+        controller.setConnection(connection);
+        controller.setUserRepository(userRepository);
+        controller.setStage(stage);
+        System.out.println(roleId);
+        controller.setRoleId(roleId);
+        controller.setId(id);
+        controller.setInfo();
+        stage.setScene(newScene);
+    }
+
+    public void addStaff(){
+        FXMLLoader fxmlLoader = new FXMLLoader(ConferenceOrganizationCompanyApplication.class.getResource("add-employee.fxml"));
+        Scene newScene = null;
+        try {
+            newScene = new Scene(fxmlLoader.load(), 700, 700);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        AddStaffController controller = fxmlLoader.getController();
+        controller.setConnection(connection);
         controller.setUserRepository(userRepository);
         controller.setStage(stage);
         System.out.println(roleId);

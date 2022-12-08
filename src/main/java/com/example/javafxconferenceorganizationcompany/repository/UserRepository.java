@@ -246,4 +246,39 @@ public class UserRepository {
             throw new RuntimeException(e);
         }
     }
+
+    public String loginIsAvailable(String login){
+        String sqlLogin = "SELECT * FROM Users WHERE userLogin=?";
+        PreparedStatement request = null;
+        try {
+        request = connection.prepareStatement(sqlLogin);
+
+        request.setString(1, login);
+        ResultSet res = request.executeQuery();
+        if (res.next()) {
+        return "Данный логин уже занят. Выберите другой.";
+        }
+        else
+            return "";
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void addNewUser(String userLogin,  byte[] userHash, String FIO, String phone, LocalDate birthDay,String email, int roleId){
+        String sql="EXEC ADD_USER ?,?,?,?,?,?,?";
+        try {
+            PreparedStatement request = connection.prepareStatement(sql);
+            request.setString(1,userLogin);
+            request.setBytes(2,userHash);
+            request.setString(3,FIO);
+            request.setString(4,phone);
+            request.setDate(5, Date.valueOf(birthDay));
+            request.setString(6,email);
+            request.setInt(7,roleId);
+            request.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="700.0" style="-fx-background-color: #FFDAB9;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.example.javafxconferenceorganizationcompany.controllers.StaffController">
+            fx:controller="com.example.javafxconferenceorganizationcompany.controllers.Staff.StaffController">
    <children>
       <AnchorPane prefHeight="89.0" prefWidth="700.0" style="-fx-background-color: #FF7F50;">
          <children>
@@ -24,7 +24,7 @@
             <Font name="Georgia" size="14.0" />
          </font>
       </Button>
-      <Button id="backToConference" layoutX="27.0" layoutY="645.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="239.0" style="-fx-background-color: #FF7F50;" text="Нанять нового сотрудника" textFill="#f4f2f2">
+      <Button id="add" onAction="#addStaff" layoutX="27.0" layoutY="645.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="239.0" style="-fx-background-color: #FF7F50;" text="Нанять нового сотрудника" textFill="#f4f2f2">
          <font>
             <Font name="Georgia" size="14.0" />
          </font>

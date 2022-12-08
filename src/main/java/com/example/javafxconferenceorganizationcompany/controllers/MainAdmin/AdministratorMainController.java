@@ -1,7 +1,8 @@
 package com.example.javafxconferenceorganizationcompany.controllers.MainAdmin;
 
 import com.example.javafxconferenceorganizationcompany.ConferenceOrganizationCompanyApplication;
-import com.example.javafxconferenceorganizationcompany.controllers.StaffController;
+import com.example.javafxconferenceorganizationcompany.controllers.Staff.AddStaffController;
+import com.example.javafxconferenceorganizationcompany.controllers.Staff.StaffController;
 import com.example.javafxconferenceorganizationcompany.models.Conference;
 import com.example.javafxconferenceorganizationcompany.models.User;
 import com.example.javafxconferenceorganizationcompany.repository.UserRepository;
@@ -15,9 +16,11 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
 import java.util.ResourceBundle;
 
 public class AdministratorMainController implements Initializable {
+    private Connection connection;
     private UserRepository userRepository;
     private Stage stage;
     private Integer id;
@@ -38,6 +41,10 @@ public class AdministratorMainController implements Initializable {
 
     @FXML
     private Label FIO;
+
+    public void setConnection(Connection connection) {
+        this.connection = connection;
+    }
 
     public void setUserRepository(UserRepository userRep) {
         userRepository=userRep;
@@ -76,6 +83,7 @@ public class AdministratorMainController implements Initializable {
             throw new RuntimeException(e);
         }
         ChangePasswordController controller = fxmlLoader.getController();
+        controller.setConnection(connection);
         controller.setUserRepository(userRepository);
         controller.setStage(stage);
         controller.setRoleId(roleId);
@@ -94,6 +102,7 @@ public class AdministratorMainController implements Initializable {
             throw new RuntimeException(e);
         }
         ChangeLoginController controller = fxmlLoader.getController();
+        controller.setConnection(connection);
         controller.setUserRepository(userRepository);
         controller.setStage(stage);
         controller.setRoleId(roleId);
@@ -112,6 +121,7 @@ public class AdministratorMainController implements Initializable {
             throw new RuntimeException(e);
         }
         ChangeEmailController controller = fxmlLoader.getController();
+        controller.setConnection(connection);
         controller.setUserRepository(userRepository);
         controller.setStage(stage);
         controller.setRoleId(roleId);
@@ -129,6 +139,7 @@ public class AdministratorMainController implements Initializable {
             throw new RuntimeException(e);
         }
         ChangePhoneNumberController controller = fxmlLoader.getController();
+        controller.setConnection(connection);
         controller.setUserRepository(userRepository);
         controller.setStage(stage);
         controller.setRoleId(roleId);
@@ -146,6 +157,7 @@ public class AdministratorMainController implements Initializable {
             throw new RuntimeException(e);
         }
         StaffController controller = fxmlLoader.getController();
+        controller.setConnection(connection);
         controller.setUserRepository(userRepository);
         controller.setStage(stage);
         System.out.println(roleId);
@@ -154,6 +166,26 @@ public class AdministratorMainController implements Initializable {
         controller.setInfo();
         stage.setScene(newScene);
     }
+
+    public void addStaff(){
+        FXMLLoader fxmlLoader = new FXMLLoader(ConferenceOrganizationCompanyApplication.class.getResource("add-employee.fxml"));
+        Scene newScene = null;
+        try {
+            newScene = new Scene(fxmlLoader.load(), 700, 700);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        AddStaffController controller = fxmlLoader.getController();
+        controller.setConnection(connection);
+        controller.setUserRepository(userRepository);
+        controller.setStage(stage);
+        System.out.println(roleId);
+        controller.setRoleId(roleId);
+        controller.setId(id);
+        controller.setInfo();
+        stage.setScene(newScene);
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
     }

@@ -106,7 +106,7 @@
             <Font name="Georgia" size="14.0" />
          </font>
       </Button>
-      <Button id="hireEmployee" fx:id="hireEmployee" layoutX="26.0" layoutY="618.0" mnemonicParsing="false" onAction="#backToMain" prefHeight="51.0" prefWidth="306.0" style="-fx-background-color: #FF7F50;" text="Нанять сотрудника" textFill="#f7f1f1" underline="true">
+      <Button id="hireEmployee" fx:id="hireEmployee" onAction="#addStaff" layoutX="26.0" layoutY="618.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="306.0" style="-fx-background-color: #FF7F50;" text="Нанять сотрудника" textFill="#f7f1f1" underline="true">
          <font>
             <Font name="Georgia" size="14.0" />
          </font>

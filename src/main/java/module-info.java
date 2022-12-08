@@ -30,4 +30,7 @@ module com.example.javafxconferenceorganizationcompany {
 
     opens com.example.javafxconferenceorganizationcompany.models to javafx.fxml;
     exports com.example.javafxconferenceorganizationcompany.models;
+
+    exports com.example.javafxconferenceorganizationcompany.controllers.Staff;
+    opens com.example.javafxconferenceorganizationcompany.controllers.Staff to javafx.fxml;
 }
