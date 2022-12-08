@@ -7,10 +7,10 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #F0FFF0;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="700.0" style="-fx-background-color: #FFDAB9;" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.example.javafxconferenceorganizationcompany.controllers.AuthenticationController">
    <children>
-      <AnchorPane prefHeight="95.0" prefWidth="700.0" style="-fx-background-color: #35c72e;">
+      <AnchorPane prefHeight="95.0" prefWidth="700.0" style="-fx-background-color: #FF7F50;">
          <children>
             <Label layoutX="225.0" layoutY="30.0" prefHeight="41.0" prefWidth="270.0" text="Вход в систему" textFill="#edfaed">
                <font>
@@ -19,7 +19,7 @@
             </Label>
          </children>
       </AnchorPane>
-      <Button layoutX="534.0" layoutY="311.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="97.0" style="-fx-background-color: #35c72e;" text="Войти" textFill="WHITE" onAction="#onEnterClick">
+      <Button layoutX="534.0" layoutY="311.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="97.0" style="-fx-background-color: #FF7F50;" text="Войти" textFill="WHITE" onAction="#onEnterClick">
          <font>
             <Font name="Georgia" size="18.0" />
          </font>

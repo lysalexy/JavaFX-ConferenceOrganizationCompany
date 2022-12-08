@@ -278,7 +278,7 @@ public class UserRepository {
     }
 
     public String loginIsAvailable(String login){
-        String sqlLogin = "SELECT * FROM Users WHERE userLogin=?";
+        String sqlLogin = "SELECT * FROM Users WHERE userLogin=? AND accountIsActive=1";
         PreparedStatement request = null;
         try {
         request = connection.prepareStatement(sqlLogin);

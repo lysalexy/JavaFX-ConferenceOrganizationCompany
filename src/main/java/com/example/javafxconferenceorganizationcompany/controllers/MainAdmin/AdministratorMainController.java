@@ -1,6 +1,7 @@
 package com.example.javafxconferenceorganizationcompany.controllers.MainAdmin;
 
 import com.example.javafxconferenceorganizationcompany.ConferenceOrganizationCompanyApplication;
+import com.example.javafxconferenceorganizationcompany.controllers.CompaniesController;
 import com.example.javafxconferenceorganizationcompany.controllers.Conference.AddConferenceController;
 import com.example.javafxconferenceorganizationcompany.controllers.LocationController;
 import com.example.javafxconferenceorganizationcompany.controllers.Staff.AddStaffController;

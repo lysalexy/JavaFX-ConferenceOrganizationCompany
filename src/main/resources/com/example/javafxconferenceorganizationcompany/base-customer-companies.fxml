@@ -8,7 +8,8 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="700.0" style="-fx-background-color: #FFDAB9;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javafxconferenceorganizationcompany.controllers.MainPersonalAssistantAndVideographer.PersonalAssistantAndVideographerMainController">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="700.0" style="-fx-background-color: #FFDAB9;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.javafxconferenceorganizationcompany.controllers.CompaniesController">
    <children>
       <AnchorPane prefHeight="89.0" prefWidth="700.0" style="-fx-background-color: #FF7F50;">
          <children>
@@ -19,7 +20,7 @@
             </Label>
          </children>
       </AnchorPane>
-      <Button id="addToBack" layoutX="435.0" layoutY="645.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="239.0" style="-fx-background-color: #FF7F50;" text="Вернуться на главную страницу" textFill="#f4f2f2">
+      <Button id="goToBack" onAction="#backToMain" layoutX="435.0" layoutY="645.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="239.0" style="-fx-background-color: #FF7F50;" text="Вернуться на главную страницу" textFill="#f4f2f2">
          <font>
             <Font name="Georgia" size="14.0" />
          </font>
@@ -46,13 +47,13 @@
             <Font name="Georgia" size="16.0" />
          </font>
       </Label>
-      <TextField id="companyName" layoutX="245.0" layoutY="413.0" prefHeight="26.0" prefWidth="267.0" />
-      <Button id="buffetPositions" layoutX="205.0" layoutY="109.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="258.0" style="-fx-background-color: #FF7F50;" text="Блюда фуршетного меню" textFill="#f4f2f2">
+      <TextField fx:id="companyName" layoutX="245.0" layoutY="413.0" prefHeight="26.0" prefWidth="267.0" />
+      <Button id="buffetPositions" onAction="#goToDishes" layoutX="205.0" layoutY="109.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="258.0" style="-fx-background-color: #FF7F50;" text="Блюда фуршетного меню" textFill="#f4f2f2">
          <font>
             <Font name="Georgia" size="19.0" />
          </font>
       </Button>
-      <Label id="invalidLocationName" layoutX="245.0" layoutY="442.0" prefHeight="17.0" prefWidth="267.0" textFill="#ec0606">
+      <Label fx:id="invalidLocationName" layoutX="245.0" layoutY="442.0" prefHeight="17.0" prefWidth="267.0" textFill="#ec0606">
          <font>
             <Font name="Georgia Italic" size="12.0" />
          </font>
@@ -62,8 +63,8 @@
             <Font name="Georgia" size="16.0" />
          </font>
       </Label>
-      <TextField id="FIO" layoutX="244.0" layoutY="463.0" prefHeight="26.0" prefWidth="267.0" />
-      <Label id="invalidFIO" layoutX="244.0" layoutY="491.0" prefHeight="17.0" prefWidth="267.0" textFill="#ec0606">
+      <TextField fx:id="FIO" layoutX="244.0" layoutY="463.0" prefHeight="26.0" prefWidth="267.0" />
+      <Label fx:id="invalidFIO" layoutX="244.0" layoutY="491.0" prefHeight="17.0" prefWidth="267.0" textFill="#ec0606">
          <font>
             <Font name="Georgia Italic" size="12.0" />
          </font>
@@ -73,13 +74,13 @@
             <Font name="Georgia" size="16.0" />
          </font>
       </Label>
-      <TextField id="contactNumber" layoutX="244.0" layoutY="507.0" prefHeight="26.0" prefWidth="267.0" />
-      <Label id="invalidNumber" layoutX="244.0" layoutY="535.0" prefHeight="17.0" prefWidth="267.0" textFill="#ec0606">
+      <TextField fx:id="contactNumber" layoutX="244.0" layoutY="507.0" prefHeight="26.0" prefWidth="267.0" />
+      <Label fx:id="invalidNumber" layoutX="244.0" layoutY="535.0" prefHeight="17.0" prefWidth="267.0" textFill="#ec0606">
          <font>
             <Font name="Georgia Italic" size="12.0" />
          </font>
       </Label>
-      <Button id="buffetPositions" layoutX="16.0" layoutY="109.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="179.0" style="-fx-background-color: #FF7F50;" text="Помещения" textFill="#f4f2f2">
+      <Button id="locations" onAction="#goToLocation" layoutX="16.0" layoutY="109.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="179.0" style="-fx-background-color: #FF7F50;" text="Помещения" textFill="#f4f2f2">
          <font>
             <Font name="Georgia" size="19.0" />
          </font>

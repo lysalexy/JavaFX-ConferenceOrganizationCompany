@@ -97,6 +97,7 @@ public class StaffController {
                     throw new RuntimeException(e);
                 }
                 StaffController controller = fxmlLoader.getController();
+                controller.setConnection(connection);
                 controller.setUserRepository(userRepository);
                 controller.setStage(stage);
                 System.out.println(roleId);
@@ -139,6 +140,7 @@ public class StaffController {
                     throw new RuntimeException(e);
                 }
                 StaffController controller = fxmlLoader.getController();
+                controller.setConnection(connection);
                 controller.setUserRepository(userRepository);
                 controller.setStage(stage);
                 System.out.println(roleId);

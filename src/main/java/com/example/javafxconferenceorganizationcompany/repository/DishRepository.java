@@ -57,6 +57,19 @@ public class DishRepository {
         return out;
     }
 
+    public void addDish(String dishName, String composition, double cost){
+        String sql = "EXEC ADD_DISHES ?,?,?";
+        try {
+            PreparedStatement request = connection.prepareStatement(sql);
+            request.setString(1,dishName);
+            request.setString(2,composition);
+            request.setDouble(3,cost);
+            request.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public void deactivateDish(int dishId){
         String sql = "EXEC DEACTIVATE_DISH_BY_ITS_ID ?";
         try {

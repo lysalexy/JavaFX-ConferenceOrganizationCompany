@@ -27,6 +27,8 @@ import java.util.regex.Pattern;
 
 public class AddStaffController {
     @FXML
+    private Label invalidBirthDate;
+    @FXML
     private TextField email;
     @FXML
     private  DatePicker birthDate;
@@ -82,11 +84,19 @@ public class AddStaffController {
     }
 
     public void add(){
+        invalidLogin.setText("");
+        invalidEmail.setText("");
+        invalidPhoneNumber.setText("");
+        invalidPassword.setText("");
+        invalidFIO.setText("");
+        invalidBirthDate.setText("");
+
         boolean loginIsValid=true;
         boolean passwordIsValid=true;
         boolean FIOIsValid=true;
         boolean phoneNumberIsValid=true;
         boolean emailIsValid=true;
+        boolean birthDayValid=true;
 
         String loginV = login.getText();
 
@@ -118,7 +128,7 @@ public class AddStaffController {
         Matcher matchF = fi.matcher(FIOV);
         if (!matchF.matches()){
             FIOIsValid=false;
-            invalidFIO.setText("Некорретное ФИО");
+            invalidFIO.setText("Некорректное ФИО");
         }
 
         String newPhoneNumber= phoneNumber.getText();
@@ -130,6 +140,10 @@ public class AddStaffController {
         }
 
         LocalDate birthDateV = birthDate.getValue();
+        if (birthDateV.isAfter(LocalDate.now())){
+            birthDayValid=false;
+            invalidBirthDate.setText("Дата рождения не может быть в будущем");
+        }
 
         String emailV= email.getText();
         Pattern em = Pattern.compile("^[a-zA-Z0-9_+&*-]+(?:\\."+
@@ -139,18 +153,29 @@ public class AddStaffController {
         Matcher matchE=em.matcher(emailV);
         if (!matchE.matches()) {
             emailIsValid=false;
-            invalidEmail.setText("Некорреткный адрес электронной почты");
+            invalidEmail.setText("Некорректный адрес электронной почты");
         }
         //roleId
 
        try {
            String roleV = role.getValue();
 
+           if(roleV.equals("администратор")){
+               roleV="administrator";
+           }
+           if(roleV.equals("личный помощник")){
+               roleV="personalAssistant";
+           }
+
+           if (roleV.equals("видеограф")){
+               roleV="videographer";
+           }
+
            Role role= new RoleRepository(connection).getRoleByRoleName(roleV);
 
            int roleId = role.getRoleId();
 
-           if (loginIsValid&&passwordIsValid&&FIOIsValid&&phoneNumberIsValid&&emailIsValid){
+           if (loginIsValid&&passwordIsValid&&FIOIsValid&&phoneNumberIsValid&&emailIsValid&&birthDayValid){
                userRepository.addNewUser(loginV,digest,FIOV,newPhoneNumber,birthDateV,emailV,roleId);
 
                employeeSuccessfullyAdded.setText("Новый сотрудник успешно добавлен");
@@ -181,12 +206,12 @@ public class AddStaffController {
     }
 
     public void setInfo(){
-        ObservableList<Role> roles= new RoleRepository(connection).getRoles();
 
         ObservableList<String> roleNames = FXCollections.observableArrayList();
-        for (Role ro : roles) {
-            roleNames.add(ro.getRoleName());
-        }
+
+        roleNames.add("администратор");
+        roleNames.add("личный помощник");
+        roleNames.add("видеограф");
 
         role.setItems(roleNames);
     }

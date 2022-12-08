@@ -8,7 +8,8 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="700.0" style="-fx-background-color: #FFDAB9;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javafxconferenceorganizationcompany.controllers.MainPersonalAssistantAndVideographer.PersonalAssistantAndVideographerMainController">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="700.0" style="-fx-background-color: #FFDAB9;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.javafxconferenceorganizationcompany.controllers.DishesController">
    <children>
       <AnchorPane prefHeight="89.0" prefWidth="700.0" style="-fx-background-color: #FF7F50;">
          <children>
@@ -19,20 +20,20 @@
             </Label>
          </children>
       </AnchorPane>
-      <Button id="addToBack" layoutX="435.0" layoutY="645.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="239.0" style="-fx-background-color: #FF7F50;" text="Вернуться на главную страницу" textFill="#f4f2f2">
+      <Button id="addToBack" onAction="#backToMain" layoutX="435.0" layoutY="645.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="239.0" style="-fx-background-color: #FF7F50;" text="Вернуться на главную страницу" textFill="#f4f2f2">
          <font>
             <Font name="Georgia" size="14.0" />
          </font>
       </Button>
-      <TableView layoutX="19.0" layoutY="172.0" prefHeight="221.0" prefWidth="665.0">
+      <TableView fx:id="dishTable" layoutX="19.0" layoutY="172.0" prefHeight="221.0" prefWidth="665.0">
         <columns>
-          <TableColumn prefWidth="172.0000057220459" text="Наименование позиции " />
-          <TableColumn prefWidth="106.4000244140625" text="Состав" />
-            <TableColumn prefWidth="242.39993286132812" text="Стоимость одной позиции(в рублях)" />
-            <TableColumn minWidth="3.199951171875" prefWidth="142.4000244140625" text="Удалить" />
+          <TableColumn fx:id="dishNameColumn" prefWidth="172.0000057220459" text="Наименование позиции " />
+          <TableColumn fx:id="dishCompositionColumn" prefWidth="106.4000244140625" text="Состав" />
+            <TableColumn fx:id="dishCostColumn" prefWidth="242.39993286132812" text="Стоимость одной позиции(в рублях)" />
+            <TableColumn fx:id="delete" minWidth="3.199951171875" prefWidth="142.4000244140625" text="Удалить" />
         </columns>
       </TableView>
-      <Button id="add" layoutX="515.0" layoutY="587.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="161.0" style="-fx-background-color: #FF7F50;" text="Добавить" textFill="#fcfbfb">
+      <Button id="add" onAction="#add" layoutX="515.0" layoutY="587.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="161.0" style="-fx-background-color: #FF7F50;" text="Добавить" textFill="#fcfbfb">
          <font>
             <Font name="Georgia" size="12.0" />
          </font>
@@ -47,13 +48,13 @@
             <Font name="Georgia" size="16.0" />
          </font>
       </Label>
-      <TextField id="locationName" layoutX="245.0" layoutY="416.0" prefHeight="26.0" prefWidth="267.0" />
-      <Button id="buffetPositions" layoutX="457.0" layoutY="109.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="225.0" style="-fx-background-color: #FF7F50;" text="Компании-заказчики" textFill="#f4f2f2">
+      <TextField fx:id="dishName" layoutX="245.0" layoutY="416.0" prefHeight="26.0" prefWidth="267.0" />
+      <Button fx:id="companies" onAction="#goToCompanies" layoutX="457.0" layoutY="109.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="225.0" style="-fx-background-color: #FF7F50;" text="Компании-заказчики" textFill="#f4f2f2">
          <font>
             <Font name="Georgia" size="19.0" />
          </font>
       </Button>
-      <Label id="invalidName" layoutX="245.0" layoutY="442.0" prefHeight="17.0" prefWidth="267.0" textFill="#ec0606">
+      <Label fx:id="invalidName" layoutX="245.0" layoutY="442.0" prefHeight="17.0" prefWidth="267.0" textFill="#ec0606">
          <font>
             <Font name="Georgia Italic" size="12.0" />
          </font>
@@ -63,8 +64,8 @@
             <Font name="Georgia" size="16.0" />
          </font>
       </Label>
-      <TextField id="locationAddress" layoutX="244.0" layoutY="463.0" prefHeight="26.0" prefWidth="267.0" />
-      <Label id="invalidCapacity" layoutX="244.0" layoutY="535.0" prefHeight="17.0" prefWidth="267.0" textFill="#ec0606">
+      <TextField fx:id="composition" layoutX="244.0" layoutY="463.0" prefHeight="26.0" prefWidth="267.0" />
+      <Label fx:id="invalidComposition" layoutX="244.0" layoutY="535.0" prefHeight="17.0" prefWidth="267.0" textFill="#ec0606">
          <font>
             <Font name="Georgia Italic" size="12.0" />
          </font>
@@ -74,13 +75,13 @@
             <Font name="Georgia" size="16.0" />
          </font>
       </Label>
-      <TextField id="locationCost" layoutX="243.0" layoutY="509.0" prefHeight="26.0" prefWidth="267.0" />
-      <Label id="invalidCost" layoutX="243.0" layoutY="538.0" prefHeight="17.0" prefWidth="267.0" textFill="#ec0606">
+      <TextField fx:id="dishCost" layoutX="243.0" layoutY="509.0" prefHeight="26.0" prefWidth="267.0" />
+      <Label fx:id="invalidCost" layoutX="243.0" layoutY="538.0" prefHeight="17.0" prefWidth="267.0" textFill="#ec0606">
          <font>
             <Font name="Georgia Italic" size="12.0" />
          </font>
       </Label>
-      <Button id="buffetPositions" layoutX="19.0" layoutY="109.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="179.0" style="-fx-background-color: #FF7F50;" text="Помещения" textFill="#f4f2f2">
+      <Button fx:id="locations" onAction="#goToLocations" layoutX="19.0" layoutY="109.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="179.0" style="-fx-background-color: #FF7F50;" text="Помещения" textFill="#f4f2f2">
          <font>
             <Font name="Georgia" size="19.0" />
          </font>

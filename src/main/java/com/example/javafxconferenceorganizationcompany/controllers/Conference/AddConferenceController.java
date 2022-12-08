@@ -109,6 +109,10 @@ public class AddConferenceController {
     }
 
     public void enterDateAndAmount(){
+        invalidStart.setText("");
+        invalidFinish.setText("");
+        invalidBudget.setText("");
+        invalidAmount.setText("");
         boolean startIsValid=true;
         boolean finishIsValid=true;
 
@@ -175,6 +179,10 @@ public class AddConferenceController {
     }
 
     public void enterFIO(){
+        invalidStart.setText("");
+        invalidFinish.setText("");
+        invalidBudget.setText("");
+        invalidAmount.setText("");
         ObservableList<String> birthDayByFIO = userRepository.getUserBirthDayByFIO((String) personalAssistantFIO.getValue());
 
         personalAssistantBirthDay.setItems(birthDayByFIO);
@@ -216,6 +224,11 @@ public class AddConferenceController {
 
     public void add(){
         ////все собираем, проверяем, пишем, и если что-то не ок, то не добавляем
+        invalidStart.setText("");
+        invalidFinish.setText("");
+        invalidBudget.setText("");
+        invalidAmount.setText("");
+        invalidFIO.setText("");
 
         boolean startIsValid=true;
         boolean finishIsValid=true;

@@ -54,7 +54,8 @@ public class LocationRepository {
                 loc.setLocationId(res.getInt(1));
                 loc.setLocationName(res.getString(2));
                 loc.setLocationAddress(res.getString(3));
-                loc.setCostPerHour(res.getInt(4));
+                loc.setLocationCapacity(res.getInt(4));
+                loc.setCostPerHour(res.getInt(5));
 
                 locations.add(loc);
             }
@@ -116,6 +117,41 @@ public class LocationRepository {
             throw new RuntimeException(e);
         }
         return location;
+    }
+
+    public Location getLocationByAddress(String address){
+        Location location = new Location();
+        String sql="SELECT * FROM Locations WHERE locationName=?";
+        PreparedStatement request = null;
+        try {
+            request = connection.prepareStatement(sql);
+            request.setString(1, address);
+            ResultSet result = request.executeQuery();
+            if (result.next()) {
+                location.setLocationId(result.getInt(1));
+                location.setLocationName(result.getString(2));
+                location.setLocationAddress(result.getString(3));
+                location.setLocationCapacity(result.getInt(4));
+                location.setCostPerHour(result.getInt(5));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return location;
+    }
+
+    public void addLocation(String locationName, String locationAddress, int capacity, double cost){
+        String sql = "EXEC ADD_LOCATION ?,?,?,?";
+        try {
+            PreparedStatement request = connection.prepareStatement(sql);
+            request.setString(1,locationName);
+            request.setString(2,locationAddress);
+            request.setInt(3,capacity);
+            request.setDouble(4,cost);
+            request.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
     public void deleteLocation(int locationId){
         String sql = "EXEC DEACTIVATE_LOCATION_BY_ITS_ID ?";

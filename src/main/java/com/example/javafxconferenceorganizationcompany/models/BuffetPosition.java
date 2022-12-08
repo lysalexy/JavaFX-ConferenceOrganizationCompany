@@ -22,7 +22,7 @@ public class BuffetPosition {
         conferenceId=new SimpleIntegerProperty();
         dishesAmount=new SimpleIntegerProperty();
         delete=new Button("Удалить");
-        delete.setStyle("-fx-background-color: #FF7F50;-fx-textFill:#f4f2f2");
+        delete.setStyle("-fx-background-color: #FF7F50;-fx-text-fill:#f4f2f2");
     }
     public Button getDelete() {
         return delete;

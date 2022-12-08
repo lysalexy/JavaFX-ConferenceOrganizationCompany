@@ -8,6 +8,7 @@ import com.example.javafxconferenceorganizationcompany.models.User;
 import com.example.javafxconferenceorganizationcompany.repository.LocationRepository;
 import com.example.javafxconferenceorganizationcompany.repository.UserRepository;
 import javafx.beans.property.Property;
+import javafx.beans.property.StringProperty;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -20,6 +21,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.util.Objects;
 
 public class LocationController {
     @FXML
@@ -101,6 +103,73 @@ public class LocationController {
         stage.setScene(newScene);
     }
 
+    public void add(){
+        invalidCost.setText("");
+        invalidAddress.setText("");
+        invalidCapacity.setText("");
+        invalidLocationName.setText("");
+
+        boolean nameIsValid=true;
+        boolean addressIsValid=true;
+
+        String locationNameV= locationName.getText();
+        ////
+        LocationRepository locationRepository=new LocationRepository(connection);
+        if(locationRepository.getLocationByName(locationNameV).getLocationId()!=0){
+            nameIsValid=false;
+            invalidLocationName.setText("Помещение с таким названием уже есть");
+        }
+
+        String locationAddressV= locationAddress.getText();
+
+        if(locationRepository.getLocationByName(locationNameV).getLocationId()!=0){
+            addressIsValid=false;
+            invalidAddress.setText("Помещение с таким адресом уже есть");
+        }
+
+        String capacity=locationCapacity.getText();
+
+        try {
+            int cap = Integer.parseInt(capacity);
+            if (cap <= 0) {
+                throw new NumberFormatException();
+            }
+
+            try{
+                double cost=Double.parseDouble(locationCost.getText());
+
+                if (nameIsValid&&addressIsValid){
+                    new LocationRepository(connection).addLocation(locationNameV,locationAddressV,cap,cost);
+
+                    FXMLLoader fxmlLoader = new FXMLLoader(ConferenceOrganizationCompanyApplication.class.getResource("base-locations.fxml"));
+                    Scene newScene = null;
+                    try {
+                        newScene = new Scene(fxmlLoader.load(), 700, 700);
+                    } catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                    LocationController controller = fxmlLoader.getController();
+                    controller.setConnection(connection);
+                    controller.setUserRepository(userRepository);
+                    controller.setStage(stage);
+                    System.out.println(roleId);
+                    controller.setRoleId(roleId);
+                    controller.setId(id);
+                    controller.setInfo();
+                    stage.setScene(newScene);
+
+
+                }
+            }
+            catch (NumberFormatException e){
+                invalidCost.setText("Необходимо ввести неотрицательное число");
+            }
+        }
+        catch (NumberFormatException e){
+            invalidCapacity.setText("Необходимо ввести целое неотрицательное число");
+        }
+    }
+
     public void setInfo(){
         LocationRepository locationRepository=new LocationRepository(connection);
         ObservableList<Location> locations = locationRepository.getAllLocations();
@@ -144,5 +213,44 @@ public class LocationController {
         deleteColumn.setCellValueFactory(new PropertyValueFactory<>("delete"));
 
         locationTable.setItems(locations);
+    }
+
+
+    public void goToCompanies(){
+        FXMLLoader fxmlLoader = new FXMLLoader(ConferenceOrganizationCompanyApplication.class.getResource("base-customer-companies.fxml"));
+        Scene newScene = null;
+        try {
+            newScene = new Scene(fxmlLoader.load(), 700, 700);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        CompaniesController controller = fxmlLoader.getController();
+        controller.setConnection(connection);
+        controller.setUserRepository(userRepository);
+        controller.setStage(stage);
+        System.out.println(roleId);
+        controller.setRoleId(roleId);
+        controller.setId(id);
+        controller.setInfo();
+        stage.setScene(newScene);
+
+    }
+    public void goToDishes(){
+        FXMLLoader fxmlLoader = new FXMLLoader(ConferenceOrganizationCompanyApplication.class.getResource("base-dishes.fxml"));
+        Scene newScene = null;
+        try {
+            newScene = new Scene(fxmlLoader.load(), 700, 700);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        DishesController controller = fxmlLoader.getController();
+        controller.setConnection(connection);
+        controller.setUserRepository(userRepository);
+        controller.setStage(stage);
+        System.out.println(roleId);
+        controller.setRoleId(roleId);
+        controller.setId(id);
+        controller.setInfo();
+        stage.setScene(newScene);
     }
 }

@@ -34,7 +34,7 @@
             <TableColumn fx:id="deleteColumn" prefWidth="103.19998168945312" text="Удалить" />
         </columns>
       </TableView>
-      <Button id="add" layoutX="515.0" layoutY="587.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="161.0" style="-fx-background-color: #FF7F50;" text="Добавить" textFill="#fcfbfb">
+      <Button id="add" onAction="#add" layoutX="515.0" layoutY="587.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="161.0" style="-fx-background-color: #FF7F50;" text="Добавить" textFill="#fcfbfb">
          <font>
             <Font name="Georgia" size="12.0" />
          </font>
@@ -50,12 +50,12 @@
          </font>
       </Label>
       <TextField fx:id="locationName" layoutX="245.0" layoutY="416.0" prefHeight="26.0" prefWidth="267.0" />
-      <Button fx:id="buffetPositions" layoutX="177.0" layoutY="109.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="267.0" style="-fx-background-color: #FF7F50;" text="Блюда фуршетного меню" textFill="#f4f2f2">
+      <Button fx:id="buffetPositions" onAction="#goToDishes" layoutX="177.0" layoutY="109.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="267.0" style="-fx-background-color: #FF7F50;" text="Блюда фуршетного меню" textFill="#f4f2f2">
          <font>
             <Font name="Georgia" size="19.0" />
          </font>
       </Button>
-      <Button fx:id="customerCompanies" layoutX="457.0" layoutY="109.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="225.0" style="-fx-background-color: #FF7F50;" text="Компании-заказчики" textFill="#f4f2f2">
+      <Button fx:id="customerCompanies" onAction="#goToCompanies" layoutX="457.0" layoutY="109.0" mnemonicParsing="false" prefHeight="36.0" prefWidth="225.0" style="-fx-background-color: #FF7F50;" text="Компании-заказчики" textFill="#f4f2f2">
          <font>
             <Font name="Georgia" size="19.0" />
          </font>
@@ -65,7 +65,7 @@
             <Font name="Georgia Italic" size="12.0" />
          </font>
       </Label>
-      <Label layoutX="30.0" layoutY="461.0" prefHeight="26.0" prefWidth="209.0" text="Физический адрес" textFill="#dc642c">
+      <Label  layoutX="30.0" layoutY="461.0" prefHeight="26.0" prefWidth="209.0" text="Физический адрес" textFill="#dc642c">
          <font>
             <Font name="Georgia" size="16.0" />
          </font>
