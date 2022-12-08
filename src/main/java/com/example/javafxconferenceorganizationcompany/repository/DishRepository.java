@@ -56,4 +56,15 @@ public class DishRepository {
         }
         return out;
     }
+
+    public void deactivateDish(int dishId){
+        String sql = "EXEC DEACTIVATE_DISH_BY_ITS_ID ?";
+        try {
+            PreparedStatement request = connection.prepareStatement(sql);
+            request.setInt(1,dishId);
+            request.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

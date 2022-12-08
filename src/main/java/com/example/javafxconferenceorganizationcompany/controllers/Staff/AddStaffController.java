@@ -191,8 +191,6 @@ public class AddStaffController {
         }
 
         role.setItems(roleNames);
-
-
     }
 
     public void backToMain(){
@@ -213,5 +211,4 @@ public class AddStaffController {
         controller.setInfo();
         stage.setScene(newScene);
     }
-
 }

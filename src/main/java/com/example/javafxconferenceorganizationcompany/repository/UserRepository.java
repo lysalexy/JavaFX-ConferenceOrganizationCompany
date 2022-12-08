@@ -160,6 +160,35 @@ public class UserRepository {
             throw new RuntimeException(e);
         }
     }
+
+    public static ObservableList<User> getFreePersonalAssistants(String start, String finish){
+        ObservableList<User> freePersonalAssistants = FXCollections.observableArrayList();
+
+        String sql = "EXEC GET_FREE_PERSONAL_ASSISTANTS ?,?";
+        PreparedStatement request = null;
+        try {
+            request = connection.prepareStatement(sql);
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
+            LocalDateTime startD=LocalDateTime.parse(start,formatter);
+            LocalDateTime finishD=LocalDateTime.parse(finish,formatter);
+
+            request.setTimestamp(1, Timestamp.valueOf(startD));
+            request.setTimestamp(2, Timestamp.valueOf(finishD));
+            ResultSet res = request.executeQuery();
+            while (res.next()) {
+                User pers = new User();
+
+                pers.setFIO(res.getString(1));
+                pers.setBirthDate(res.getString(2));
+
+                freePersonalAssistants.add(pers);
+            }
+            return freePersonalAssistants;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
     public static User getVideographerByFIO(String FIO){
         User user = new User();
         String sql="SELECT TOP 1 * FROM Users WHERE roleId=3 AND FIO=?";
@@ -280,5 +309,52 @@ public class UserRepository {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public  ObservableList<String> getUserBirthDayByFIO(String FIO){
+        ObservableList<String> birthDays= FXCollections.observableArrayList();;
+        String sql="SELECT  * FROM Users WHERE  FIO=?";
+        PreparedStatement request = null;
+        try {
+            request = connection.prepareStatement(sql);
+            request.setString(1, FIO);
+            ResultSet result = request.executeQuery();
+            while (result.next()) {
+                String birthDay=result.getDate(6).toString();
+
+                birthDays.add(birthDay);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return birthDays;
+    }
+
+    public User getUserByHisFIOAndBirthDay(String FIO, String birthDay){
+        User user = new User();
+        String sql="EXEC GET_PERSONAL_ASSISTANT_ID_BY_FIO_AND_BIRTHDATE ?,?";
+        PreparedStatement request = null;
+        try {
+            request = connection.prepareStatement(sql);
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.S");
+            LocalDateTime birthDayD=LocalDateTime.parse(birthDay,formatter);
+
+            request.setString(1, FIO);
+            request.setTimestamp(2, Timestamp.valueOf(birthDayD));
+
+            ResultSet result = request.executeQuery();
+            if (result.next()) {
+               user.setUserId(result.getInt(1));
+                user.setUserLogin(result.getString(2));
+                user.setFIO(result.getString(3));
+                user.setPhoneNumber(result.getString(4));
+                user.setBirthDate(result.getString(5));
+                user.setEmail(result.getString(6));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return user;
     }
 }

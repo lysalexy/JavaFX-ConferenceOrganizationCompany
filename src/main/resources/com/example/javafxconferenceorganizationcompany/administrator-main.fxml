@@ -112,7 +112,7 @@
             <Font name="Georgia" size="14.0" />
          </font>
       </Button>
-      <Button id="newConference" fx:id="newConference" layoutX="362.0" layoutY="618.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="306.0" style="-fx-background-color: #FF7F50;" text="Организация новой конференции" textFill="#f7f1f1" underline="true">
+      <Button id="newConference" fx:id="newConference"  onAction="#addConference" layoutX="362.0" layoutY="618.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="306.0" style="-fx-background-color: #FF7F50;" text="Организация новой конференции" textFill="#f7f1f1" underline="true">
          <font>
             <Font name="Georgia" size="14.0" />
          </font>

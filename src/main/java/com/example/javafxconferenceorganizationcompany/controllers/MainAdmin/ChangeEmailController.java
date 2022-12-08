@@ -1,6 +1,7 @@
 package com.example.javafxconferenceorganizationcompany.controllers.MainAdmin;
 
 import com.example.javafxconferenceorganizationcompany.ConferenceOrganizationCompanyApplication;
+import com.example.javafxconferenceorganizationcompany.controllers.Conference.AddConferenceController;
 import com.example.javafxconferenceorganizationcompany.controllers.Staff.AddStaffController;
 import com.example.javafxconferenceorganizationcompany.controllers.Staff.StaffController;
 import com.example.javafxconferenceorganizationcompany.models.User;
@@ -127,6 +128,24 @@ public class ChangeEmailController  implements Initializable {
         else{
             invalidInput.setText("Некорректные данные. Введите настоящий адрес электронной почты");
         }
+    }
+
+    public void addConference(){
+        FXMLLoader fxmlLoader = new FXMLLoader(ConferenceOrganizationCompanyApplication.class.getResource("add-conference.fxml"));
+        Scene newScene = null;
+        try {
+            newScene = new Scene(fxmlLoader.load(), 700, 700);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        AddConferenceController controller = fxmlLoader.getController();
+        controller.setConnection(connection);
+        controller.setUserRepository(userRepository);
+        controller.setStage(stage);
+        System.out.println(roleId);
+        controller.setRoleId(roleId);
+        controller.setId(id);
+        stage.setScene(newScene);
     }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
