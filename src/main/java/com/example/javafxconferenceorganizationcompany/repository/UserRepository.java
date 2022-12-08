@@ -180,6 +180,70 @@ public class UserRepository {
             throw new RuntimeException(e);
         }
         return user;
+    }
 
+    public ObservableList<User> getAllActivePersonalAssistants(){
+        ObservableList<User> activeAssistants = FXCollections.observableArrayList();
+
+        String sql = "SELECT * FROM GET_ALL_ACTIVE_PERSONAL_ASSISTANTS";
+        PreparedStatement request = null;
+        try {
+            request = connection.prepareStatement(sql);
+
+            ResultSet res = request.executeQuery();
+            while (res.next()) {
+                User pers = new User();
+
+                pers.setUserId(res.getInt(1));
+                pers.setUserLogin(res.getString(2));
+                pers.setFIO(res.getString(3));
+                pers.setPhoneNumber(res.getString(4));
+                pers.setBirthDate(res.getString(5));
+                pers.setEmail(res.getString(6));
+
+                activeAssistants.add(pers);
+            }
+            return activeAssistants;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public ObservableList<User> getAllActiveVideographers(){
+        ObservableList<User> activeVideographers = FXCollections.observableArrayList();
+
+        String sql = "SELECT * FROM GET_ALL_ACTIVE_VIDEOGRAPHERS";
+        PreparedStatement request = null;
+        try {
+            request = connection.prepareStatement(sql);
+
+            ResultSet res = request.executeQuery();
+            while (res.next()) {
+                User vid = new User();
+
+                vid.setUserId(res.getInt(1));
+                vid.setUserLogin(res.getString(2));
+                vid.setFIO(res.getString(3));
+                vid.setPhoneNumber(res.getString(4));
+                vid.setBirthDate(res.getString(5));
+                vid.setEmail(res.getString(6));
+
+                activeVideographers.add(vid);
+            }
+            return activeVideographers;
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void deactivateUser(int id){
+        String sql="EXEC DEACTIVATE_USER_BY_ITS_ID ?";
+        try {
+            PreparedStatement request = connection.prepareStatement(sql);
+            request.setInt(1,id);
+            request.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

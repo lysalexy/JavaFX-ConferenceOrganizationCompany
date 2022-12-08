@@ -1,6 +1,7 @@
 package com.example.javafxconferenceorganizationcompany.controllers.MainAdmin;
 
 import com.example.javafxconferenceorganizationcompany.ConferenceOrganizationCompanyApplication;
+import com.example.javafxconferenceorganizationcompany.controllers.StaffController;
 import com.example.javafxconferenceorganizationcompany.models.Conference;
 import com.example.javafxconferenceorganizationcompany.models.User;
 import com.example.javafxconferenceorganizationcompany.repository.UserRepository;
@@ -136,6 +137,23 @@ public class AdministratorMainController implements Initializable {
         stage.setScene(newScene);
     }
 
+    public void toStaff(){
+        FXMLLoader fxmlLoader = new FXMLLoader(ConferenceOrganizationCompanyApplication.class.getResource("staff.fxml"));
+        Scene newScene = null;
+        try {
+            newScene = new Scene(fxmlLoader.load(), 700, 700);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        StaffController controller = fxmlLoader.getController();
+        controller.setUserRepository(userRepository);
+        controller.setStage(stage);
+        System.out.println(roleId);
+        controller.setRoleId(roleId);
+        controller.setId(id);
+        controller.setInfo();
+        stage.setScene(newScene);
+    }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
     }
