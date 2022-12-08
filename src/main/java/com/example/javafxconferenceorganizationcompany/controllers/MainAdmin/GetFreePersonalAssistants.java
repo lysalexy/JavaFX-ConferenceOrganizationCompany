@@ -132,6 +132,7 @@ public class GetFreePersonalAssistants {
                     LocalDateTime startD = LocalDateTime.parse(start.getText(), formatter);
                     LocalDateTime finishD = LocalDateTime.parse(finish.getText(), formatter);
 
+                    if (startD.isBefore(finishD)) {
 
                     FXMLLoader fxmlLoader = new FXMLLoader(ConferenceOrganizationCompanyApplication.class.getResource("administrator-main-get-locations.fxml"));
                     Scene newScene = null;
@@ -150,7 +151,10 @@ public class GetFreePersonalAssistants {
                     controller.setId(id);
                     controller.setInfo();
                     controller.setStartAndFinish(start.getText(), finish.getText());
-                    stage.setScene(newScene);
+                    stage.setScene(newScene);}
+                    else {
+                        invalidDate.setText("Время до должно быть раньше времени после");
+                    }
                 } catch (DateTimeParseException n) {
                     invalidDate.setText("Формат даты и времени yyyy-MM-dd HH:mm:ss.S");
                 }
@@ -169,6 +173,7 @@ public class GetFreePersonalAssistants {
                 LocalDateTime startD = LocalDateTime.parse(start.getText(), formatter);
                 LocalDateTime finishD = LocalDateTime.parse(finish.getText(), formatter);
 
+                if (startD.isBefore(finishD)) {
 
                 FXMLLoader fxmlLoader = new FXMLLoader(ConferenceOrganizationCompanyApplication.class.getResource("administrator-main-get-videographers.fxml"));
                 Scene newScene = null;
@@ -187,7 +192,10 @@ public class GetFreePersonalAssistants {
                 controller.setId(id);
                 controller.setStartAndFinish(start.getText(), finish.getText());
                 controller.setInfo();
-                stage.setScene(newScene);
+                stage.setScene(newScene);}
+                else {
+                    invalidDate.setText("Время до должно быть раньше времени после");
+                }
             } catch (DateTimeParseException n) {
                 invalidDate.setText("Формат даты и времени yyyy-MM-dd HH:mm:ss.S");
             }

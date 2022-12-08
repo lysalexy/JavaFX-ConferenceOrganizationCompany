@@ -84,7 +84,7 @@ public class GetFreeVideographers {
     }
 
     public void setUserRepository(UserRepository userRep) {
-        userRepository=userRep;
+        userRepository = userRep;
     }
 
 
@@ -96,17 +96,17 @@ public class GetFreeVideographers {
         id = i;
     }
 
-    public void setRoleId(Integer role){
-        roleId=role;
+    public void setRoleId(Integer role) {
+        roleId = role;
     }
 
-    public void setStartAndFinish(String st, String fin){
+    public void setStartAndFinish(String st, String fin) {
         start.setText(st);
         finish.setText(fin);
     }
 
-    public void setInfo(){
-        User user=UserRepository.getUserPersonalInfo(id);
+    public void setInfo() {
+        User user = UserRepository.getUserPersonalInfo(id);
 
         login.setText(user.getUserLogin());
         FIO.setText(user.getFIO());
@@ -114,7 +114,7 @@ public class GetFreeVideographers {
         birthDay.setText(user.getBirthDate());
         email.setText(user.getEmail());
 
-        ObservableList<User> videographers= userRepository.getFreeVideographers(start.getText(), finish.getText());
+        ObservableList<User> videographers = userRepository.getFreeVideographers(start.getText(), finish.getText());
 
         FIOColumn.setCellValueFactory(new PropertyValueFactory<>("FIO"));
         birthDayColumn.setCellValueFactory(new PropertyValueFactory<>("birthDate"));
@@ -131,28 +131,33 @@ public class GetFreeVideographers {
                 LocalDateTime startD = LocalDateTime.parse(start.getText(), formatter);
                 LocalDateTime finishD = LocalDateTime.parse(finish.getText(), formatter);
 
+                if (startD.isBefore(finishD)) {
 
-                FXMLLoader fxmlLoader = new FXMLLoader(ConferenceOrganizationCompanyApplication.class.getResource("administrator-main-get-personal-assistants.fxml"));
-                Scene newScene = null;
-                try {
-                    newScene = new Scene(fxmlLoader.load(), 700, 700);
-                } catch (IOException r) {
-                    throw new RuntimeException(r);
+                    FXMLLoader fxmlLoader = new FXMLLoader(ConferenceOrganizationCompanyApplication.class.getResource("administrator-main-get-personal-assistants.fxml"));
+                    Scene newScene = null;
+                    try {
+                        newScene = new Scene(fxmlLoader.load(), 700, 700);
+                    } catch (IOException r) {
+                        throw new RuntimeException(r);
+                    }
+                    GetFreePersonalAssistants controller = fxmlLoader.getController();
+                    controller.setConnection(connection);
+                    controller.setConnection(connection);
+                    controller.setUserRepository(userRepository);
+                    controller.setStage(stage);
+                    System.out.println(roleId);
+                    controller.setRoleId(roleId);
+                    controller.setId(id);
+                    controller.setStartAndFinish(start.getText(), finish.getText());
+                    controller.setInfo();
+                    stage.setScene(newScene);
+                } else {
+                    invalidDate.setText("Время до должно быть раньше времени после");
                 }
-                GetFreePersonalAssistants controller = fxmlLoader.getController();
-                controller.setConnection(connection);
-                controller.setConnection(connection);
-                controller.setUserRepository(userRepository);
-                controller.setStage(stage);
-                System.out.println(roleId);
-                controller.setRoleId(roleId);
-                controller.setId(id);
-                controller.setStartAndFinish(start.getText(), finish.getText());
-                controller.setInfo();
-                stage.setScene(newScene);
             } catch (DateTimeParseException n) {
                 invalidDate.setText("Формат даты и времени yyyy-MM-dd HH:mm:ss.S");
             }
+
         };
 
         personalAssistants.setOnAction(eventAss);
@@ -166,25 +171,29 @@ public class GetFreeVideographers {
                     LocalDateTime startD = LocalDateTime.parse(start.getText(), formatter);
                     LocalDateTime finishD = LocalDateTime.parse(finish.getText(), formatter);
 
+                    if (startD.isBefore(finishD)) {
 
-                    FXMLLoader fxmlLoader = new FXMLLoader(ConferenceOrganizationCompanyApplication.class.getResource("administrator-main-get-locations.fxml"));
-                    Scene newScene = null;
-                    try {
-                        newScene = new Scene(fxmlLoader.load(), 700, 700);
-                    } catch (IOException r) {
-                        throw new RuntimeException(r);
+                        FXMLLoader fxmlLoader = new FXMLLoader(ConferenceOrganizationCompanyApplication.class.getResource("administrator-main-get-locations.fxml"));
+                        Scene newScene = null;
+                        try {
+                            newScene = new Scene(fxmlLoader.load(), 700, 700);
+                        } catch (IOException r) {
+                            throw new RuntimeException(r);
+                        }
+                        GetFreeLocations controller = fxmlLoader.getController();
+                        controller.setConnection(connection);
+                        controller.setConnection(connection);
+                        controller.setUserRepository(userRepository);
+                        controller.setStage(stage);
+                        System.out.println(roleId);
+                        controller.setRoleId(roleId);
+                        controller.setId(id);
+                        controller.setInfo();
+                        controller.setStartAndFinish(start.getText(), finish.getText());
+                        stage.setScene(newScene);
+                    } else {
+                        invalidDate.setText("Время до должно быть раньше времени после");
                     }
-                    GetFreeLocations controller = fxmlLoader.getController();
-                    controller.setConnection(connection);
-                    controller.setConnection(connection);
-                    controller.setUserRepository(userRepository);
-                    controller.setStage(stage);
-                    System.out.println(roleId);
-                    controller.setRoleId(roleId);
-                    controller.setId(id);
-                    controller.setInfo();
-                    controller.setStartAndFinish(start.getText(), finish.getText());
-                    stage.setScene(newScene);
                 } catch (DateTimeParseException n) {
                     invalidDate.setText("Формат даты и времени yyyy-MM-dd HH:mm:ss.S");
                 }
@@ -196,7 +205,7 @@ public class GetFreeVideographers {
 
     }
 
-    public void onClickChangePassword(){
+    public void onClickChangePassword() {
         FXMLLoader fxmlLoader = new FXMLLoader(ConferenceOrganizationCompanyApplication.class.getResource("administrator-main-change-password.fxml"));
         Scene newScene = null;
         try {
@@ -215,7 +224,7 @@ public class GetFreeVideographers {
 
     }
 
-    public void onClickChangeLogin(){
+    public void onClickChangeLogin() {
         FXMLLoader fxmlLoader = new FXMLLoader(ConferenceOrganizationCompanyApplication.class.getResource("administrator-main-change-login.fxml"));
         Scene newScene = null;
         try {
@@ -234,7 +243,7 @@ public class GetFreeVideographers {
 
     }
 
-    public void onClickChangeEmail(){
+    public void onClickChangeEmail() {
         FXMLLoader fxmlLoader = new FXMLLoader(ConferenceOrganizationCompanyApplication.class.getResource("administrator-main-change-email.fxml"));
         Scene newScene = null;
         try {
@@ -252,7 +261,8 @@ public class GetFreeVideographers {
         stage.setScene(newScene);
 
     }
-    public void onClickChangePhoneNumber(){
+
+    public void onClickChangePhoneNumber() {
         FXMLLoader fxmlLoader = new FXMLLoader(ConferenceOrganizationCompanyApplication.class.getResource("administrator-main-change-phone.fxml"));
         Scene newScene = null;
         try {
@@ -270,7 +280,7 @@ public class GetFreeVideographers {
         stage.setScene(newScene);
     }
 
-    public void toStaff(){
+    public void toStaff() {
         FXMLLoader fxmlLoader = new FXMLLoader(ConferenceOrganizationCompanyApplication.class.getResource("staff.fxml"));
         Scene newScene = null;
         try {
@@ -289,7 +299,7 @@ public class GetFreeVideographers {
         stage.setScene(newScene);
     }
 
-    public void addStaff(){
+    public void addStaff() {
         FXMLLoader fxmlLoader = new FXMLLoader(ConferenceOrganizationCompanyApplication.class.getResource("add-employee.fxml"));
         Scene newScene = null;
         try {
@@ -308,7 +318,7 @@ public class GetFreeVideographers {
         stage.setScene(newScene);
     }
 
-    public void goToBase(){
+    public void goToBase() {
         FXMLLoader fxmlLoader = new FXMLLoader(ConferenceOrganizationCompanyApplication.class.getResource("base-locations.fxml"));
         Scene newScene = null;
         try {
@@ -328,7 +338,7 @@ public class GetFreeVideographers {
 
     }
 
-    public void addConference(){
+    public void addConference() {
         FXMLLoader fxmlLoader = new FXMLLoader(ConferenceOrganizationCompanyApplication.class.getResource("add-conference.fxml"));
         Scene newScene = null;
         try {
