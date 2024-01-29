@@ -115,6 +115,10 @@ public class DishesController {
         try {
             double cost = Double.parseDouble(costPerPos);
 
+            if (cost<0){
+                throw new NumberFormatException();
+            }
+
             if (nameIsValid) {
                 new DishRepository(connection).addDish(dishNameV,compositionV,cost);
 

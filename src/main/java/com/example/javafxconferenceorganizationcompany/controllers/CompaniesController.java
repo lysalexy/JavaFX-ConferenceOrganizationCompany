@@ -161,26 +161,26 @@ public class CompaniesController {
             invalidNumber.setText("Формат номера телефона: +7....");
         }
 
-        if (companyNameIsValid&&FIOIsValid&&phoneIsValid){
-            companyRepository.addCompany(companyNameV, FIOV,newPhoneNumber);
-        }
+        if (companyNameIsValid&&FIOIsValid&&phoneIsValid) {
+            companyRepository.addCompany(companyNameV, FIOV, newPhoneNumber);
 
-        FXMLLoader fxmlLoader = new FXMLLoader(ConferenceOrganizationCompanyApplication.class.getResource("base-customer-companies.fxml"));
-        Scene newScene = null;
-        try {
-            newScene = new Scene(fxmlLoader.load(), 700, 700);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+            FXMLLoader fxmlLoader = new FXMLLoader(ConferenceOrganizationCompanyApplication.class.getResource("base-customer-companies.fxml"));
+            Scene newScene = null;
+            try {
+                newScene = new Scene(fxmlLoader.load(), 700, 700);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+            CompaniesController controller = fxmlLoader.getController();
+            controller.setConnection(connection);
+            controller.setUserRepository(userRepository);
+            controller.setStage(stage);
+            System.out.println(roleId);
+            controller.setRoleId(roleId);
+            controller.setId(id);
+            controller.setInfo();
+            stage.setScene(newScene);
         }
-        CompaniesController controller = fxmlLoader.getController();
-        controller.setConnection(connection);
-        controller.setUserRepository(userRepository);
-        controller.setStage(stage);
-        System.out.println(roleId);
-        controller.setRoleId(roleId);
-        controller.setId(id);
-        controller.setInfo();
-        stage.setScene(newScene);
     }
 
 
